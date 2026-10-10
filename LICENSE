@@ -1,0 +1,60 @@
+HAK CIPTA DILINDUNGI UNDANG-UNDANG
+PROPRIETARY & INTELLECTUAL PROPERTY LICENSE
+
+Hak Cipta (c) 2026 Davin Maritza. Seluruh Hak Cipta Dilindungi.
+Copyright (c) 2026 Davin Maritza. All Rights Reserved.
+
+================================================================================
+BAGIAN I: BAHASA INDONESIA (KETENTUAN HAK CIPTA RESMI)
+================================================================================
+
+Perangkat lunak, kode sumber (source code), arsitektur model kecerdasan buatan, 
+bobot jaringan saraf tiruan (model checkpoints), struktur antarmuka, dan dokumentasi 
+terkait dengan "CerebroMaritza CADx" (selanjutnya disebut "Karya Cipta") adalah 
+kekayaan intelektual eksklusif milik Davin Maritza.
+
+Karya Cipta ini dilindungi secara hukum oleh Undang-Undang Republik Indonesia 
+Nomor 28 Tahun 2014 tentang Hak Cipta dan traktat/konvensi internasional mengenai 
+kekayaan intelektual (termasuk Berne Convention dan WIPO Copyright Treaty).
+
+KETENTUAN PENGGUNAAN & LARANGAN:
+1. DILARANG KERAS menyalin, menduplikasi, memodifikasi, menerjemahkan, 
+   atau merekayasa balik (reverse engineering, decompiling, disassembling) 
+   Karya Cipta ini atau bagian apa pun daripadanya tanpa izin tertulis resmi dari Pencipta.
+2. DILARANG KERAS menyebarluaskan, memperdagangkan, menyewakan, meminjamkan, 
+   mensublisensikan, atau mengomersialisasikan Karya Cipta ini kepada pihak ketiga.
+3. Hak Cipta dan kepemilikan penuh tetap berada pada Davin Maritza.
+4. Repositori publik hanya berfungsi sebagai media pameran portofolio (showcase), 
+   pembuktian ilmiah, dan arsip pencatatan hak kekayaan intelektual (HKI).
+
+PENAFIAN MEDIS (MEDICAL DISCLAIMER):
+Karya Cipta ini dikembangkan sebagai prototipe riset rekayasa perangkat lunak dan 
+sistem pendukung keputusan akademis (Clinical Decision Support System / SaMD prototype). 
+Karya Cipta ini bukan merupakan alat diagnosis medis mandiri dan tidak menggantikan 
+kewenangan pemeriksaan langsung oleh dokter spesialis radiologi atau dokter spesialis 
+bedah saraf yang berlisensi.
+
+================================================================================
+SECTION II: ENGLISH VERSION (PROPRIETARY NOTICE)
+================================================================================
+
+This software, source code, neural network architecture implementations, model weights, 
+user interface configurations, and associated documentation for "CerebroMaritza CADx" 
+(collectively referred to as the "Software") are the exclusive intellectual property 
+of Davin Maritza.
+
+TERMS AND PROHIBITIONS:
+1. PROPRIETARY AND CONFIDENTIAL: Permission is NOT granted to copy, reproduce, 
+   distribute, modify, create derivative works, reverse engineer, decompile, or 
+   disassemble any part of this Software without prior express written authorization 
+   from the copyright holder (Davin Maritza).
+2. COMMERCIAL USE PROHIBITED: Commercialization, monetization, leasing, sublicensing, 
+   or unauthorized third-party deployment of this Software is strictly prohibited.
+3. SHOWCASE REPOSITORY: The public presentation of this repository is strictly for 
+   academic demonstration, intellectual property disclosure, and portfolio showcase. 
+   No license to execute or distribute the underlying core source code is granted.
+
+DISCLAIMER:
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. 
+IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+LIABILITY ARISING FROM THE USE OF THIS SOFTWARE.
