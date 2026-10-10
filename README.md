@@ -15,7 +15,7 @@
 * **Pemegang Hak Cipta**: Davin Maritza
 * **Tahun Penciptaan**: 2026
 * **Tanggal / Tempat Pertama Kali Diumumkan**: 2026, Indonesia
-* **Repositori Resmi**: [https://github.com/davinmaritza/medical-imaging-tumor-detection](https://github.com/davinmaritza/medical-imaging-tumor-detection)
+* **Repositori Resmi**: [https://github.com/davinmaritza/davion-ai](https://github.com/davinmaritza/davion-ai)
 * **Status Lisensi**: Proprietary — Hak Cipta Dilindungi Undang-Undang (*All Rights Reserved*)
 
 ---
@@ -87,8 +87,8 @@ Ciptaan program komputer ini terdiri atas serangkaian modul terintegrasi:
 
 1. **Mengunduh Repositori Kode Sumber**:
    ```bash
-   git clone https://github.com/davinmaritza/medical-imaging-tumor-detection.git
-   cd medical-imaging-tumor-detection
+   git clone https://github.com/davinmaritza/davion-ai.git
+   cd davion-ai
    ```
 2. **Pemasangan Dependensi**:
    ```bash
@@ -346,8 +346,8 @@ medicine/
 ### 1. Installation
 
 ```bash
-git clone https://github.com/davinmaritza/medical-imaging-tumor-detection.git
-cd medical-imaging-tumor-detection
+git clone https://github.com/davinmaritza/davion-ai.git
+cd davion-ai
 pip install -r requirements.txt
 ```
 
@@ -379,8 +379,8 @@ python train_local.py --arch custom --epochs 10 --batch_size 16
 
 | Notebook | Focus | Scans / Cohort | Direct Launch |
 |---|---|---|---|
-| **Advanced 4-Class Pipeline** (`advanced_brain_tumor_colab.ipynb`) | EfficientNet-B4, Mixed-Precision FP16, Grad-CAM++, ONNX | 12,400 Scans | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/davinmaritza/medical-imaging-tumor-detection/blob/main/notebooks/advanced_brain_tumor_colab.ipynb) |
-| **BraTS Multimodal 3D** (`brats_efficientnet_colab.ipynb`) | 4-Channel 3D Volumes, NIfTI preprocessor | T1, T1ce, T2, FLAIR | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/davinmaritza/medical-imaging-tumor-detection/blob/main/notebooks/brats_efficientnet_colab.ipynb) |
+| **Advanced 4-Class Pipeline** (`advanced_brain_tumor_colab.ipynb`) | EfficientNet-B4, Mixed-Precision FP16, Grad-CAM++, ONNX | 12,400 Scans | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/davinmaritza/davion-ai/blob/main/notebooks/advanced_brain_tumor_colab.ipynb) |
+| **BraTS Multimodal 3D** (`brats_efficientnet_colab.ipynb`) | 4-Channel 3D Volumes, NIfTI preprocessor | T1, T1ce, T2, FLAIR | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/davinmaritza/davion-ai/blob/main/notebooks/brats_efficientnet_colab.ipynb) |
 
 ---
 
