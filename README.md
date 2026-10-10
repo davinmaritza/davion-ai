@@ -1,4 +1,4 @@
-# Persijple CADx: Sistem Perangkat Lunak Kecerdasan Buatan untuk Deteksi, Klasifikasi, dan Segmentasi Citra MRI Tumor Otak
+# Davion AI: Sistem Perangkat Lunak Kecerdasan Buatan untuk Deteksi, Klasifikasi, dan Segmentasi Citra MRI Tumor Otak
 
 > **DOKUMEN SPESIFIKASI DAN DESKRIPSI CIPTAAN PROGRAM KOMPUTER**  
 > **HAK CIPTA DILINDUNGI UNDANG-UNDANG REPUBLIK INDONESIA (UU NO. 28 TAHUN 2014)**  
@@ -9,7 +9,7 @@
 ## 🇮🇩 Bagian I: Deskripsi Ciptaan Resmi (Pencatatan Hak Cipta)
 
 ### 1. Metadata Hak Cipta Ciptaan Program Komputer
-* **Judul Ciptaan**: Persijple CADx: Sistem Perangkat Lunak Kecerdasan Buatan untuk Deteksi, Klasifikasi, dan Segmentasi Citra MRI Tumor Otak
+* **Judul Ciptaan**: Davion AI: Sistem Perangkat Lunak Kecerdasan Buatan untuk Deteksi, Klasifikasi, dan Segmentasi Citra MRI Tumor Otak
 * **Jenis Ciptaan**: Program Komputer (Software as a Medical Device Research Prototype)
 * **Pencipta**: Davin Maritza
 * **Pemegang Hak Cipta**: Davin Maritza
@@ -21,7 +21,7 @@
 ---
 
 ### 2. Ringkasan & Uraian Teknis Ciptaan
-**Persijple CADx** merupakan karya cipta perangkat lunak sistem cerdas (*intelligent diagnostic workstation & pipeline builder*) berbasis komputasi kecerdasan buatan (*Artificial Intelligence / Deep Learning*) yang dirancang khusus oleh Davin Maritza untuk memproses, menganalisis, mengklasifikasi, dan mensegmentasi citra medis resonansi magnetik (*Magnetic Resonance Imaging / MRI*) kepala (cranial).
+**Davion AI** merupakan karya cipta perangkat lunak sistem cerdas (*intelligent diagnostic workstation & pipeline builder*) berbasis komputasi kecerdasan buatan (*Artificial Intelligence / Deep Learning*) yang dirancang khusus oleh Davin Maritza untuk memproses, menganalisis, mengklasifikasi, dan mensegmentasi citra medis resonansi magnetik (*Magnetic Resonance Imaging / MRI*) kepala (cranial).
 
 Perangkat lunak ini mengintegrasikan arsitektur *deep convolutional neural networks*, *vision transformers*, dan *semantic segmentation networks* dengan antarmuka stasiun kerja radiologi digital interaktif (PACS viewer, kaliper morfometri digital, visualisasi atribusi xAI Grad-CAM++, sintesis kontras virtual tanpa gadolinium, estimasi batas reseksi bedah saraf, serta asisten pelaporan terstruktur standar ACR RadReport otomatis).
 
@@ -126,9 +126,9 @@ tentang Hak Cipta dan konvensi hak cipta internasional yang berlaku.
 
 ## 🇬🇧 Section II: Complete Technical Documentation & Engineering Specifications
 
-# Persijple CADx: Brain Tumor MRI Detection & Analysis Diagnostic Pipeline
+# Davion AI: Brain Tumor MRI Detection & Analysis Diagnostic Pipeline
 
-Persijple CADx provides an experimental end-to-end pipeline for cranial brain tumor MRI analysis, engineered by Davin Maritza. It connects trained deep learning classifiers (EfficientNet-B4) and semantic segmentation networks (Attention U-Net) with diagnostic workstation interfaces (DICOM viewing, heuristic surgical clearance estimations, digital PACS calipers, and templated ACR RadReport clinical reporting).
+Davion AI provides an experimental end-to-end pipeline for cranial brain tumor MRI analysis, engineered by Davin Maritza. It connects trained deep learning classifiers (EfficientNet-B4) and semantic segmentation networks (Attention U-Net) with diagnostic workstation interfaces (DICOM viewing, heuristic surgical clearance estimations, digital PACS calipers, and templated ACR RadReport clinical reporting).
 
 ---
 
