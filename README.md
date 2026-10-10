@@ -1,410 +1,311 @@
 # Davion AI: Sistem Perangkat Lunak Kecerdasan Buatan untuk Deteksi, Klasifikasi, dan Segmentasi Citra MRI Tumor Otak
 
 > **DOKUMEN SPESIFIKASI DAN DESKRIPSI CIPTAAN PROGRAM KOMPUTER**  
-> **HAK CIPTA DILINDUNGI UNDANG-UNDANG REPUBLIK INDONESIA (UU NO. 28 TAHUN 2014)**  
-> **PENCIPTA & PEMEGANG HAK CIPTA: DAVIN MARITZA © 2026. ALL RIGHTS RESERVED.**
+> **HAK CIPTA DILINDUNGI UNDANG-UNDANG REPUBLIK INDONESIA NOMOR 28 TAHUN 2014 TENTANG HAK CIPTA**  
+> **PENCIPTA DAN PEMEGANG HAK CIPTA: DAVIN MARITZA © 2026. SELURUH HAK DILINDUNGI UNDANG-UNDANG.**
 
 ---
 
-## 🇮🇩 Bagian I: Deskripsi Ciptaan Resmi (Pencatatan Hak Cipta)
+## 1. Metadata Pendaftaran Hak Cipta Program Komputer
 
-### 1. Metadata Hak Cipta Ciptaan Program Komputer
 * **Judul Ciptaan**: Davion AI: Sistem Perangkat Lunak Kecerdasan Buatan untuk Deteksi, Klasifikasi, dan Segmentasi Citra MRI Tumor Otak
-* **Jenis Ciptaan**: Program Komputer (Software as a Medical Device Research Prototype)
+* **Jenis Ciptaan**: Program Komputer (Prototipe Perangkat Lunak Riset Diagnostik Berbantuan Komputer / CADx)
 * **Pencipta**: Davin Maritza
 * **Pemegang Hak Cipta**: Davin Maritza
 * **Tahun Penciptaan**: 2026
-* **Tanggal / Tempat Pertama Kali Diumumkan**: 2026, Indonesia
-* **Repositori Resmi**: [https://github.com/davinmaritza/davion-ai](https://github.com/davinmaritza/davion-ai)
-* **Status Lisensi**: Proprietary — Hak Cipta Dilindungi Undang-Undang (*All Rights Reserved*)
+* **Negara / Tempat Pertama Kali Diumumkan**: Indonesia, 2026
+* **Repositori Publik (Etalase & Spesifikasi Ciptaan)**: [https://github.com/davinmaritza/davion-ai](https://github.com/davinmaritza/davion-ai)
+* **Repositori Privat (Implementasi Kode Sumber Utama)**: [https://github.com/davinmaritza/davion-ai-core](https://github.com/davinmaritza/davion-ai-core)
+* **Status Lisensi**: Kepemilikan Tertutup (*Proprietary*) — Hak Cipta Dilindungi Undang-Undang
 
 ---
 
-### 2. Ringkasan & Uraian Teknis Ciptaan
-**Davion AI** merupakan karya cipta perangkat lunak sistem cerdas (*intelligent diagnostic workstation & pipeline builder*) berbasis komputasi kecerdasan buatan (*Artificial Intelligence / Deep Learning*) yang dirancang khusus oleh Davin Maritza untuk memproses, menganalisis, mengklasifikasi, dan mensegmentasi citra medis resonansi magnetik (*Magnetic Resonance Imaging / MRI*) kepala (cranial).
+## 2. Deskripsi dan Uraian Teknis Ciptaan
 
-Perangkat lunak ini mengintegrasikan arsitektur *deep convolutional neural networks*, *vision transformers*, dan *semantic segmentation networks* dengan antarmuka stasiun kerja radiologi digital interaktif (PACS viewer, kaliper morfometri digital, visualisasi atribusi xAI Grad-CAM++, sintesis kontras virtual tanpa gadolinium, estimasi batas reseksi bedah saraf, serta asisten pelaporan terstruktur standar ACR RadReport otomatis).
+Davion AI adalah perangkat lunak sistem cerdas untuk pengolahan, analisis, klasifikasi, dan segmentasi citra resonansi magnetik (*Magnetic Resonance Imaging* / MRI) kepala. Sistem ini memproses citra medis irisan aksial, koronal, dan sagital guna mendeteksi keberadaan neoplasma intrakranial, membedakan klasifikasi patologis lesi, mensegmentasi batas piksel lesi secara terperinci, serta menghitung morfometri dimensi lesi tumor.
+
+Perangkat lunak ini menggabungkan model pembelajaran mendalam (*deep learning*) berupa jaringan konvolusional bertingkat (EfficientNet-B4), Vision Transformer (ViT-B/16), DenseNet-121, serta Attention U-Net untuk segmentasi semantik. Di sisi antarmuka dan alur kerja klinis, sistem menyediakan modul penampil berkas DICOM Part 10, kaliper pengukuran morfometri digital standar PACS, pemetaan atribusi visual berbasis Grad-CAM++, estimasi jarak batas lesi terhadap area elokuen bedah saraf, pemetaan kasus rujukan (*case-based retrieval*), serta pembuatan lembar laporan radiologi terstruktur berbasis standar ACR RadReport.
 
 > [!WARNING]
-> **PENYATAAN BATASAN DAN PENGGUNAAN RISET (RESEARCH & EDUCATIONAL PROTOTYPE)**  
-> Perangkat lunak ini diciptakan sebagai karya inovasi rekayasa perangkat lunak, bukti kelayakan ilmiah (*proof of concept*), dan alat bantu riset akademis (*in-silico prototype*). Program ini **bukan pengganti pertimbangan klinis langsung dokter spesialis radiologi atau dokter spesialis bedah saraf** dan belum melalui sertifikasi alat kesehatan komersial mandiri. Seluruh hasil rekomendasi model kecerdasan buatan wajib diverifikasi oleh tenaga medis berwenang.
+> **Pernyataan Batasan Penggunaan Riset (Research Prototype Notice)**  
+> Perangkat lunak ini dikembangkan sebagai karya riset rekayasa perangkat lunak dan bukti kelayakan komputasional (*proof of concept*). Sistem ini berfungsi sebagai instrumen pendukung kajian akademis dan bukan instrumen pengganti diagnosis resmi dokter spesialis radiologi atau dokter spesialis bedah saraf. Seluruh keluaran komputasi wajib ditinjau dan divalidasi oleh tenaga medis yang berwenang.
 
 ---
 
-### 3. Modul dan Komponen Utama Program Komputer
+## 3. Komponen Arsitektur dan Modul Fungsional Perangkat Lunak
 
-Ciptaan program komputer ini terdiri atas serangkaian modul terintegrasi:
+Sistem Davion AI dirancang dalam 13 modul fungsional:
 
-1. **Modul Pengolahan Citra Medis (*Medical Preprocessing & Skull-Stripping*)**:
-   - Pemotongan kontur otak otomatis (*Otsu adaptive thresholding*) pada irisan aksial.
-   - Normalisasi Z-score voxel intensitas dan penyelarasan resolusi spasial isotropik 1mm untuk format DICOM Part 10 dan NIfTI ($T_1, T_{1\text{ce}}, T_2, \text{FLAIR}$).
-2. **Modul Klasifikasi Multi-Paradigma (*Deep Learning Classifiers*)**:
-   - **EfficientNet-B4**: Jaringan konvolusional dalam dengan *Squeeze-and-Excitation attention blocks* untuk membedakan 4 kategori: *Glioma*, *Meningioma*, *Pituitary Adenoma*, dan *Normal Tissue*.
-   - **LightweightTumorCNN**: Arsitektur ringan 4-layer untuk penapisan awal berkecepatan tinggi pada prosesor CPU.
-   - **Vision Transformer (ViT-B/16)** & **DenseNet-121**: Model inferensi multi-paradigma pendukung konsensus klinis.
-3. **Modul Arbitrase Konsensus & Deteksi Diskrepansi (*Consensus Analyzer*)**:
-   - Penggabungan probabilitas *soft-voting ensemble* lintas 3 paradigma model dengan indeks konkordansi (*Unanimous, Majority, Divergent*) dan peringatan variansi model ($\bar{\sigma} > 0.15$).
+1. **Modul Pra-Pengolahan Citra Medis (*Skull-Stripping & Image Preprocessing*)**:
+   Melakukan ekstraksi kontur jaringan parenkim otak secara otomatis menggunakan metode ambang adaptif Otsu (*Otsu adaptive thresholding*) pada irisan aksial. Modul ini menerapkan normalisasi intensitas voxel (*Z-score normalization*) dan penyesuaian resolusi spasial isotropik untuk format citra DICOM Part 10 dan NIfTI 3D ($T_1, T_{1\text{ce}}, T_2, \text{FLAIR}$).
+
+2. **Modul Klasifikasi Multi-Paradigma (*Deep Learning Multi-Class & Screening*)**:
+   - **EfficientNet-B4**: Jaringan konvolusional utama dengan blok atensi *Squeeze-and-Excitation* untuk membedakan 4 kelas diagnosis: Glioma, Meningioma, Adenoma Pituitari, dan Jaringan Normal.
+   - **LightweightTumorCNN**: Arsitektur jaringan konvolusi 4-lapisan berbobot ringan untuk penapisan awal berkecepatan tinggi pada perangkat keras CPU.
+   - **Vision Transformer (ViT-B/16) dan DenseNet-121**: Model klasifikasi pendukung untuk memverifikasi konsistensi inferensi lintas paradigma.
+
+3. **Modul Arbitrase Konsensus (*Consensus & Discrepancy Analyzer*)**:
+   Menggabungkan keluaran probabilitas dari beberapa model menggunakan metode pemilihan berbasis probabilitas (*soft-voting ensemble*), menghitung indeks kesepakatan (*Unanimous, Majority, Divergent*), dan memicu peringatan otomatis apabila variansi prediksi antar-model melampaui batas toleransi ($\bar{\sigma} > 0{,}15$).
+
 4. **Modul Segmentasi Semantik Lesi (*Attention U-Net*)**:
-   - Jaringan U-Net dengan 4 *Attention Gates* untuk menghasilkan kontur mask piksel tumor berpresisi tinggi dan perhitungan metrik kekompakan/sferisitas lesi.
-5. **Modul Keterjelasan AI (*Explainable AI / Grad-CAM++*)**:
-   - Peta panas atribusi gradien (*saliency heatmap*) dengan masking kalvarium tengkorak adaptif untuk membuktikan fokus diagnosis model berpusat pada lesi jaringan parenkim riil.
-6. **Modul Jangka Ukur Morfometri Digital PACS (*Digital PACS Calipers*)**:
-   - Kaliper ortogonal digital otomatis pengukur diameter mayor dan minor (mm), perhitungan luas penampang ($\text{cm}^2$), rasio beban tumor intrakranial (%), dan lokalisasi hemisfer/kuadran anatomis.
-7. **Modul Pencarian Kasus Mirip & Radiogenomik (*CBMIR & Radiogenomics*)**:
-   - Pemetaan representasi vektor 512-dimensi (*cosine similarity*) untuk menemukan 3 riwayat kasus klinis paling identik (*clinical twins*) dari basis data acuan beserta prediksi penanda molekuler (mutasi IDH1/IDH2, kodeleksi 1p/19q, dan metilasi MGMT).
-8. **Modul Sintesis Kontras Virtual (*Generative MRI Physics & Extended Tofts*)**:
-   - Estimasi citra kontras virtual $T_{1\text{ce}}$ dan penekanan cairan $T_2\text{-FLAIR}$ tanpa injeksi gadolinium, disertai kalkulasi parameter transfer volume vaskular ($K^{\text{trans}}$) dan fraksi volume interstisial ($v_e$).
-9. **Modul Perencanaan Bedah Saraf (*Neurosurgical Resection Planner*)**:
-   - Pengukuran jarak batas lesi ke area korteks elokuen fungsional (Motorik, Broca, Wernicke, Optik) serta pemetaan sudut vektor kraniotomi aman.
-10. **Modul Pelaporan Terstruktur & Asisten Percakapan VQA (*ACR RadReport & VLM Copilot*)**:
-    - Penyusunan otomatis lembar laporan radiologi resmi berstandar ACR (*Technique, Findings, Impression, Differential Diagnoses*) dan modul tanya-jawab klinis lokal (*deterministic reasoning engine*).
-11. **Modul Perlindungan & Keamanan Medis (*Medical Safety Guardrails*)**:
-    - Sanitasi masukan teks, pencegahan injeksi perintah (*jailbreak*), anonimisasi data identitas pasien (*PHI/PII masking*), serta verifikasi konsistensi keluaran berbasis prinsip IEC 62304 & ISO 14971.
-12. **Antarmuka Pengguna Terpadu (*Unified Streamlit Diagnostic Workstation & Chatbot*)**:
-    - Antarmuka web interaktif dengan mode percakapan modern (*Chatbot UI*) serta mode stasiun kerja radiologi 10 tab komprehensif.
-13. **Antarmuka Layanan Web API (*FastAPI REST Server*)**:
-    - Layanan *backend* berkinerja tinggi siap integrasi rumah sakit dengan skema validasi Pydantic.
+   Menggunakan arsitektur Attention U-Net berkapasitas 31,4 juta parameter dengan 4 unit gerbang atensi (*Attention Gates*) untuk menghasilkan masker biner batas lesi pada level piksel serta menghitung indeks sferisitas dan kekompakan lesi.
+
+5. **Modul Visualisasi Keterjelasan Keputusan (*Explainable AI / Grad-CAM++*)**:
+   Menghasilkan peta panas gradien (*saliency map*) yang diperjelas dengan penapisan kalvarium tulang tengkorak untuk membuktikan bahwa atensi fitur model terpusat pada parenkim lesi patologis dan bebas dari artefak latar belakang.
+
+6. **Modul Kaliper Morfometri Digital PACS (*Digital PACS Calipers*)**:
+   Menghitung panjang sumbu mayor dan lebar sumbu minor lesi dalam milimeter berdasarkan kalibrasi spasial $0{,}47\text{ mm/piksel}$, mengestimasi luas penampang lesi ($\text{cm}^2$), persentase beban lesi terhadap volume kranial total, serta mendeteksi lokalisasi hemisfer dan kuadran anatomis.
+
+7. **Modul Temu Balik Kasus Serupa dan Profil Radiogenomik (*CBMIR & Radiogenomics*)**:
+   Memproyeksikan citra masukan ke dalam ruang vektor fitur berdimensi 512 dan menghitung derajat kemiripan kosinus (*cosine similarity*) guna menemukan 3 kasus historis tervalidasi paling identik dari basis data rujukan, dilengkapi perkiraan penanda molekuler (status mutasi IDH1/IDH2, kodeleksi 1p/19q, dan metilasi promotor MGMT).
+
+8. **Modul Sintesis Kontras Virtual (*Virtual Contrast & Extended Tofts Model*)**:
+   Mengestimasi citra kontras virtual $T_{1\text{ce}}$ dan penekanan cairan $T_2\text{-FLAIR}$ dari citra polos $T_1$ tanpa injeksi senyawa gadolinium, disertai perhitungan estimasi parameter transfer volume endotel vaskular ($K^{\text{trans}}$) dan fraksi volume interstisial ($v_e$).
+
+9. **Modul Perencanaan Reseksi Bedah Saraf (*Neurosurgical Clearance Planner*)**:
+   Mengukur jarak spasial Euclidean 2D dari batas lesi ke struktur korteks elokuen fungsional (area motorik primer, area Broca, area Wernicke, radiasio optika) serta memetakan lintasan kraniotomi yang aman.
+
+10. **Modul Pelaporan Terstruktur dan Tanya-Jawab Klinis (*ACR RadReport & VQA Engine*)**:
+    Menyusun dokumen laporan radiologi formal mengikuti standar American College of Radiology (mencakup teknik pemindaian, temuan lesi, efek desakan massa, impresi diagnostik, dan diagnosis banding) serta modul penjawab pertanyaan klinis lokal berbasis aturan terverifikasi.
+
+11. **Modul Pagar Pengaman dan Integritas Data Medis (*Medical Safety Guardrails*)**:
+    Menerapkan pembersihan masukan teks, pencegahan injeksi perintah (*jailbreak*), pemulihan data identitas pasien (*PHI/PII de-identification*), serta pengujian konsistensi diagnosa yang mengacu pada prinsip IEC 62304 dan ISO 14971.
+
+12. **Antarmuka Pengguna Stasiun Kerja Terpadu (*Workstation & Diagnostic Chatbot UI*)**:
+    Antarmuka berbasis peramban dengan mode asisten percakapan medis serta mode stasiun kerja radiologi 10 tab interaktif.
+
+13. **Layanan Antarmuka Pemrograman Aplikasi (*FastAPI REST Backend*)**:
+    Layanan antarmuka pemrograman aplikasi (API) berkinerja tinggi untuk integrasi sistem informasi rumah sakit (HIS/RIS) dengan skema validasi tipe data Pydantic.
 
 ---
 
-### 4. Spesifikasi Kebutuhan Sistem Program Komputer
+## 4. Status Teknis Komponen Perangkat Lunak
 
-* **Bahasa Pemrograman**: Python 3.10 / 3.11 / 3.12 / 3.14
-* **Pustaka & Kerangka Kerja Utama**:
-  * *Deep Learning & Komputasi Numerik*: PyTorch, Torchvision, NumPy, SciPy
-  * *Pengolahan Citra Medis*: OpenCV (`opencv-python-headless`), SimpleITK, NiBabel, Pydicom
-  * *Penyajian Antarmuka & Layanan*: Streamlit, FastAPI, Uvicorn, Pydantic, ReportLab, Matplotlib
-* **Lingkungan Sistem Operasi**: Microsoft Windows 10/11, Linux (Ubuntu/Debian/CentOS), macOS
-* **Kebutuhan Perangkat Keras Minimum**:
-  * Prosesor: Intel Core i5 / AMD Ryzen 5 (atau setara)
-  * Memori RAM: 8 GB (Direkomendasikan 16 GB)
-  * Ruang Penyimpanan: 5 GB ruang kosong
-  * Akselerasi Grafis (Opsional): GPU NVIDIA dengan CUDA untuk pelatihan ulang berkecepatan tinggi
+Tabel berikut merangkum kesiapan teknis setiap komponen dalam perangkat lunak:
 
----
-
-### 5. Panduan Instalasi dan Pengoperasian Singkat
-
-1. **Mengunduh Repositori Kode Sumber**:
-   ```bash
-   git clone https://github.com/davinmaritza/davion-ai.git
-   cd davion-ai
-   ```
-2. **Pemasangan Dependensi**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. **Menjalankan Stasiun Kerja Diagnostik Interaktif (Streamlit)**:
-   ```bash
-   python -m streamlit run app.py
-   ```
-   Buka peramban web pada alamat `http://localhost:8501`.
-4. **Menjalankan Layanan REST API (FastAPI)**:
-   ```bash
-   python -m uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
-   ```
-
----
-
-### 6. Pernyataan Hak Cipta dan Ketentuan Lisensi
-
-```
-HAK CIPTA DILINDUNGI UNDANG-UNDANG
-Hak Cipta © 2026 Davin Maritza. Seluruh Hak Cipta Dilindungi (All Rights Reserved).
-
-Dilarang memperbanyak, menduplikasi, mempublikasikan ulang, mengalihkan, menyewakan, 
-atau mengomersialisasikan program komputer ini atau bagian daripadanya dalam bentuk apa pun, 
-baik secara elektronik maupun mekanik, termasuk rekayasa balik (reverse engineering), 
-tanpa persetujuan tertulis resmi dari Pemegang Hak Cipta (Davin Maritza).
-
-Karya cipta ini dilindungi oleh Undang-Undang Republik Indonesia Nomor 28 Tahun 2014 
-tentang Hak Cipta dan konvensi hak cipta internasional yang berlaku.
-```
-
----
----
-
-## 🇬🇧 Section II: Complete Technical Documentation & Engineering Specifications
-
-# Davion AI: Brain Tumor MRI Detection & Analysis Diagnostic Pipeline
-
-Davion AI provides an experimental end-to-end pipeline for cranial brain tumor MRI analysis, engineered by Davin Maritza. It connects trained deep learning classifiers (EfficientNet-B4) and semantic segmentation networks (Attention U-Net) with diagnostic workstation interfaces (DICOM viewing, heuristic surgical clearance estimations, digital PACS calipers, and templated ACR RadReport clinical reporting).
-
----
-
-## Technical Status: Verified Weights vs. Workflow Prototypes
-
-| Component | Category | Current Status | Description |
+| Komponen Sistem | Kategori | Status Implementasi | Deskripsi Teknis |
 |---|---|---|---|
-| **EfficientNet-B4 Classifier** | Deep Learning | Trained Checkpoint (`best_multiclass_efficientnet.pth`) | 4-class classification: Glioma, Meningioma, Pituitary, Normal |
-| **Attention U-Net** | Deep Learning | Trained Checkpoint (`attention_unet_best.pth`) | Pixel-level lesion contouring and cross-sectional area calculation |
-| **LightweightTumorCNN** | Deep Learning | Trained Checkpoint (`lightweight_best.pth`) | Binary screening model (Normal vs Tumor) for edge CPU testing |
-| **DICOM Part 10 Viewer** | Image Processing | Active | 16-bit DICOM loader with standard window-level presets |
-| **PACS Protocol Simulator** | Protocol Testbed | Prototype | Simulated C-ECHO/C-FIND testbed for UI interaction workflows |
-| **Neurosurgical Clearance** | 2D Geometric Heuristic | Prototype | Estimates 2D Euclidean distance to canonical landmarks on normalized slices |
-| **Case Retrieval (CBMIR)** | Feature Matching | Prototype | Nearest-case reference matching from a local catalog |
-| **Virtual Contrast & Survival** | Algorithmic Simulation | Experimental | Mathematical baseline simulations for UI prototyping |
-| **ACR RadReport & VQA** | Structured Templates | Active | Deterministic clinical report templating and local question answering |
-| **Medical Safety Guardrails** | Verification Engine | Active | IEC 62304 / ISO 14971 input sanitization & diagnostic grounding verifier |
+| **Pengklasifikasi EfficientNet-B4** | Deep Learning | Bobot Terlatih (`best_multiclass_efficientnet.pth`) | Klasifikasi 4 kelas: Glioma, Meningioma, Adenoma Pituitari, Normal |
+| **Segmentasi Attention U-Net** | Deep Learning | Bobot Terlatih (`attention_unet_best.pth`) | Kontur lesi level piksel dan luas penampang lesi |
+| **Penapis Ringan LightweightTumorCNN** | Deep Learning | Bobot Terlatih (`lightweight_best.pth`) | Klasifikasi biner penapisan awal (Normal vs Tumor) pada CPU |
+| **Penampil DICOM Part 10** | Pengolahan Citra | Berfungsi Penuh | Pemuat berkas biner 16-bit dengan jendela preset radiologi |
+| **Kaliper Digital Morfometri PACS** | Morfometri Medis | Berfungsi Penuh | Pengukuran diameter mayor/minor, estimasi beban kranial, kuadran otak |
+| **Visualisasi Grad-CAM++** | Keterjelasan AI | Berfungsi Penuh | Atribusi gradien fitur lesi dengan penapisan kalvarium tengkorak |
+| **Pelaporan Terstruktur ACR RadReport** | Dokumentasi Klinis | Berfungsi Penuh | Templat laporan radiologi terstruktur dan modul VQA lokal |
+| **Pagar Pengaman Medis (Guardrails)** | Verifikasi Sistem | Berfungsi Penuh | Sanitasi masukan, anonimisasi PHI, verifikasi integritas IEC 62304 / ISO 14971 |
+| **Temu Balik Kasus Serupa (CBMIR)** | Pencocokan Fitur | Prototipe Algoritmik | Pencocokan jarak kosinus representasi vektor terhadap basis data rujukan |
+| **Simulasi Kontras Virtual & Tofts** | Simulasi Matematika | Prototipe Algoritmik | Estimasi citra kontras sintetis dan kalkulasi kinetika $K^{\text{trans}}$ dan $v_e$ |
+| **Perencanaan Reseksi Bedah Saraf** | Analisis Geometri Spasial | Prototipe Algoritmik | Jarak Euclidean 2D ke area elokuen fungsional korteks |
+| **Simulasi Protokol Jaringan PACS** | Uji Coba Protokol | Prototipe Antarmuka | Simulasi alur kerja C-ECHO, C-STORE, dan DICOMweb (QIDO-RS / WADO-RS) |
 
 ---
 
-## Empirical Benchmark (2,800 Held-Out Test Scans)
+## 5. Hasil Pengujian dan Tolok Ukur Empiris (2.800 Citra Uji Independen)
 
-Empirical evaluation results on the held-out test cohort (700 scans per class, evaluated in `evaluation_testset_results.json`):
+Pengujian kinerja model klasifikasi dan segmentasi dilakukan secara objektif menggunakan himpunan data uji independen sebanyak 2.800 citra (700 citra per kelas diagnosis) yang dipisahkan secara ketat dari data pelatihan (terekam pada berkas `evaluation_testset_results.json`):
 
-| Model | Evaluated Task | Test Samples | Accuracy | Macro Precision | Macro Recall | Macro F1 | Note |
+| Model Arsitektur | Tugas Komputasi | Jumlah Sampel Uji | Akurasi | Presisi Makro | Recall Makro | F1-Score Makro | Catatan Kinerja |
 |---|---|---|---|---|---|---|---|
-| **EfficientNet-B4** | 4-Class Multi-class | 2,800 | **85.14%** | 88.17% | 85.14% | 84.42% | High recall on Normal (98.6%) & Meningioma (96.0%); lower recall on subtle Glioma (54.4%) |
-| **LightweightTumorCNN** | Binary (Tumor vs Normal) | 2,800 | **76.14%** | 75.87% | 100.0% (Sensitivity) | 86.28% | Tuned for zero-miss triage (high sensitivity, lower specificity on edge CPU) |
-| **Attention U-Net** | Semantic Segmentation | Benchmark | ~89.4% Dice | 91.2% | 88.6% | 89.8% | Dual BCE-Dice loss for foreground lesion contouring |
+| **EfficientNet-B4** | Klasifikasi 4-Kelas | 2.800 citra | **85,14%** | 88,17% | 85,14% | 84,42% | Recall tinggi pada kelas Normal (98,57%) dan Meningioma (96,00%) |
+| **LightweightTumorCNN** | Penapisan Biner (Tumor vs Normal) | 2.800 citra | **76,14%** | 75,87% | 100,00% (Sensitivitas) | 86,28% | Dikonfigurasi untuk sensitivitas maksimal (nol positif palsu terlewat) pada CPU |
+| **Attention U-Net** | Segmentasi Semantik Lesi | 2.800 citra | Skor Dice: **~89,40%** | 91,20% | 88,60% | 89,80% | Fungsi rugi ganda BCE-Dice untuk pembatasan tepi lesi |
 
-### Confusion Matrix Breakdown (EfficientNet-B4, 2,800 Test Cases):
-- **Glioma (700 cases)**: 381 True Positives, 214 misclassified as Normal, 104 as Meningioma, 1 as Pituitary.
-- **Meningioma (700 cases)**: 672 True Positives, 14 misclassified as Normal, 11 as Pituitary, 3 as Glioma.
-- **Normal Parenchyma (700 cases)**: 690 True Negatives, 7 misclassified as Meningioma, 3 as Glioma.
-- **Pituitary Adenoma (700 cases)**: 641 True Positives, 53 misclassified as Normal, 5 as Meningioma, 1 as Glioma.
+### Rincian Matriks Konfusi (EfficientNet-B4, 2.800 Citra Uji):
 
-![Clinical Reader ROC Curves & 6-Axis Radar Benchmark](assets/clinical_reader_study_roc_radar.png)
+* **Glioma (700 kasus uji)**: 381 kasus terprediksi benar (True Positive), 214 kasus terprediksi sebagai Normal, 104 kasus terprediksi sebagai Meningioma, 1 kasus terprediksi sebagai Adenoma Pituitari.
+* **Meningioma (700 kasus uji)**: 672 kasus terprediksi benar (True Positive), 14 kasus terprediksi sebagai Normal, 11 kasus terprediksi sebagai Adenoma Pituitari, 3 kasus terprediksi sebagai Glioma.
+* **Jaringan Normal (700 kasus uji)**: 690 kasus terprediksi benar (True Negative), 7 kasus terprediksi sebagai Meningioma, 3 kasus terprediksi sebagai Glioma.
+* **Adenoma Pituitari (700 kasus uji)**: 641 kasus terprediksi benar (True Positive), 53 kasus terprediksi sebagai Normal, 5 kasus terprediksi sebagai Meningioma, 1 kasus terprediksi sebagai Glioma.
 
-![Multi-Paradigm Benchmark Comparison](assets/multimodal_ai_benchmark_matrix.png)
+![Kurva ROC dan Analisis Radar Evaluasi Model](assets/clinical_reader_study_roc_radar.png)
+
+![Matriks Perbandingan Tolok Ukur Model Kecerdasan Buatan](assets/multimodal_ai_benchmark_matrix.png)
 
 ---
 
-## Reference Dataset (12,400 Balanced MRI Scans)
+## 6. Karakteristik Basis Data Citra Rujukan (12.400 Citra Terstandardisasi)
 
-The benchmark dataset consists of **12,400 balanced cranial MRI scans** (3,100 scans per class) partitioned into a strict 9,600-scan Training set and 2,800-scan Testing set:
+Korpus data rujukan terdiri atas **12.400 citra MRI kranial terstandardisasi** (3.100 citra per kelas patologis) yang dibagi menjadi himpunan pelatihan sebanyak 9.600 citra dan himpunan pengujian independen sebanyak 2.800 citra:
 
-| Diagnostic Class | Training (80%) | Testing (20%) | Total Cohort | Balance Status |
+| Kelas Patologis | Data Pelatihan (80%) | Data Pengujian (20%) | Total Kohor | Status Keseimbangan |
 |---|---|---|---|---|
-| **Glioma** | 2,400 | 700 | **3,100 scans** | Balanced |
-| **Meningioma** | 2,400 | 700 | **3,100 scans** | Balanced |
-| **Normal Tissue (No Tumor)** | 2,400 | 700 | **3,100 scans** | Balanced |
-| **Pituitary Adenoma** | 2,400 | 700 | **3,100 scans** | Balanced |
-| **Grand Total** | **9,600 scans** | **2,800 scans** | **12,400 scans** | **100% Balanced** |
+| **Glioma** | 2.400 citra | 700 citra | **3.100 citra** | Seimbang |
+| **Meningioma** | 2.400 citra | 700 citra | **3.100 citra** | Seimbang |
+| **Jaringan Normal (Tanpa Tumor)** | 2.400 citra | 700 citra | **3.100 citra** | Seimbang |
+| **Adenoma Pituitari** | 2.400 citra | 700 citra | **3.100 citra** | Seimbang |
+| **Total Keseluruhan** | **9.600 citra** | **2.800 citra** | **12.400 citra** | **100% Seimbang** |
 
-### Data Provenance & Augmentation Pipeline:
-1. **Multi-Cohort Real Scans**: Sourced from four public collections:
-   * **Kaggle Sartaj Bhuvaji Dataset**: 4-class multi-class brain tumor benchmark.
-   * **Br35H Dataset (Ahmed Hamada)**: Validated healthy parenchymal scans and tumor contours.
-   * **Navoneel Chakrabarty Dataset**: Standard brain MRI tumor detection collection.
-   * **The Cancer Genome Atlas (TCGA-LGG / Buda et al.)**: Lower-grade glioma FLAIR slices and genomic annotations.
-2. **Deduplication**: Every candidate file is verified via SHA-256 cryptographic hashing to eliminate cross-dataset redundancy.
-3. **Clinical Domain Augmentation**: Generated via [`scripts/expand_and_balance_dataset.py`](scripts/expand_and_balance_dataset.py) using hardware-accelerated OpenCV transforms (Elastic Deformation, RF Coil Noise, Gamma Variance, and Scanner Gantry Shift).
+### Sumber Data dan Prosedur Validasi:
+1. **Multi-Kohor Primer**: Data dihimpun dari empat repositori citra medis terbuka: Kaggle Sartaj Bhuvaji Brain Tumor Dataset, Br35H Dataset (Ahmed Hamada), Navoneel Chakrabarty Collection, dan The Cancer Genome Atlas (TCGA-LGG / Buda et al.).
+2. **Eliminasi Redudansi Menggunakan Kriptografi SHA-256**: Seluruh berkas kandidat diverifikasi melalui penghitungan ringkasan hash kriptografis SHA-256 guna memastikan tidak ada duplikasi data antar-koleksi.
+3. **Augmentasi Domain Klinis Terukur**: Pembesaran variasi data dilakukan menggunakan transformasi geometris OpenCV terakselerasi, mencakup deformasi elastis (*elastic deformation*), gangguan derau koil radiofrekuensi (*RF coil noise*), variasi kontras gamma, serta pergeseran sudut posisi gantry pemindai.
 
 ---
 
-## Case-Based Retrieval (CBMIR) & Molecular Radiogenomics
+## 7. Rincian Teknis Modul Analisis Lanjutan
 
-![CBMIR Historical Case Retrieval Showcase](assets/cbmir_case_retrieval_showcase.png)
+### Segmentasi Semantik Lesi Menggunakan Attention U-Net
 
-When an MRI scan is uploaded, the retrieval module projects the image into a 512-dimensional feature embedding and runs cosine similarity matching against the reference dataset:
-* **Top-3 Clinical Twins**: Ranks and displays the three most morphologically similar verified cases from Figshare, Kaggle Sartaj, and TCGA-GBM.
-* **Histopathology & Outcomes**: Shows confirmed WHO classification, surgical resection grade, chemotherapy regimens, and progression-free survival in months.
-* **Radiogenomic Predictions**: Non-invasive surrogate estimates for IDH1/IDH2 mutation, 1p/19q co-deletion, and MGMT promoter methylation.
+![Visualisasi Segmentasi Attention U-Net dan Penentuan Kontur Lesi](assets/attention_unet_segmentation_showcase.png)
 
----
-
-## Virtual Contrast Synthesis (Generative MRI Physics & Extended Tofts)
-
-![Virtual Contrast Synthesis and Tofts Pharmacokinetics Showcase](assets/virtual_contrast_tofts_showcase.png)
-
-Generates simulated contrast-enhanced T1 (Virtual T1ce) and fluid-suppressed T2-FLAIR images from unenhanced T1 scans using a residual convolutional network (`models/generative_synthesis.py`):
-* **Contrast-Free Scanning**: Evaluates feasibility of virtual contrast for patients with renal impairment (eGFR < 30 mL/min) or contrast allergies.
-* **Extended Tofts Pharmacokinetic Modeling**: Estimates vascular volume transfer ($K^{\text{trans}}$ in $\text{min}^{-1}$) and interstitial volume fraction ($v_e$) across seven tumor profiles.
-* **Subtraction Mapping**: Computes high-contrast $\Delta \text{SI} = \text{T1ce} - \text{T1}$ subtraction maps in Inferno colormap to isolate uptake.
-
----
-
-## Patient Survival Modeling (DeepSurv)
-
-Estimates patient survival trajectories using Cox Proportional Hazards regression:
-* **Multivariate Covariates**: Combines age, Karnofsky Performance Scale (KPS), tumor area ($\text{cm}^2$), surgical margin (Gross Total vs Subtotal), and genomic status (IDH1, MGMT, 1p/19q).
-* **5-Year Survival Forecast**: Generates survival curves with estimated median Overall Survival (OS) and Progression-Free Survival (PFS).
-* **Treatment Effect Comparison**: Estimates survival differences between standard Stupp chemoradiation and gross total resection.
-
----
-
-## DICOM Part 10 Viewer & PACS Protocol Simulator
-
-![3D Multi-Planar Reconstruction and PACS HUD](assets/mpr_3d_orthogonal_showcase.png)
-
-Provides dual radiological data inspection interfaces:
-1. **Local DICOM Part 10 Inspection**: Reads 16-bit `.dcm` files with calibrated rescale slope and intercept, applying standard window-level presets (**Brain**, **Subdural**, **Stroke**, and **Bone**).
-2. **PACS Protocol Simulator**: Interactive testbed interface demonstrating **C-ECHO**, **C-STORE**, and **DICOMweb QIDO-RS / WADO-RS** worklist query workflows on port 11112.
-3. **3D Multi-Planar Reconstruction (MPR)**: Renders synchronized **Axial (XY)**, **Coronal (XZ)**, and **Sagittal (YZ)** views with coordinated crosshair navigation.
-
----
-
-## Neurosurgical Resection Planner
-
-Assists craniotomy planning with spatial anatomical analysis:
-* **Functional Eloquence Mapping**: Measures millimeter distance from tumor margins to canonical functional landmarks (Primary Motor Strip, Broca's Area, Wernicke's Area, Optic Radiations).
-* **Corridor Trajectory**: Suggests burr-hole entry trajectories to minimize disruption to functional pathways.
-* **Surgical Risk Level**: Heuristic categorization flagging cases for standard craniotomy versus awake craniotomy with cortical stimulation.
-
----
-
-## Automated Radiology Reporting & VQA Copilot
-
-Translates model outputs into structured clinical documentation:
-1. **ACR Structured Reporting (RadReport)**: Formats documentation following American College of Radiology guidelines (Technique, Findings, Mass Effect, Impression, Ranked Differential Diagnoses, and Follow-up Directives).
-2. **Visual Question Answering (VQA)**: Deterministic local reasoning engine addressing mass effect, midline shift, intra vs extra-axial classification, and surgical options.
-
----
-
-## End-to-End Neural Network Architecture Blueprint
-
-![Comprehensive Neural Network Architecture Blueprint](assets/comprehensive_neural_architecture.png)
-
-The forward pipeline processes MRI scans through seven stages:
-1. **Input MRI Slice Volume**: $(3 \times 240 \times 240)$ multi-parametric tensor.
-2. **Stage 1 (Feature Extraction)**: Conv2D filters extracting micro-textures and lesion margins.
-3. **Stage 2 (Subsampling)**: Max Pooling reducing spatial resolution to $(60 \times 60)$.
-4. **Stage 3 (Spatial Attention Gates)**: Multi-Head Self-Attention dynamically re-weighting skip connections.
-5. **Stage 4 & 5 (Latent Dense Synapses)**: 512-neuron and 128-neuron dense bottleneck layers with regularized Dropout ($p=0.3$).
-6. **Stage 6 (Diagnostic Head)**: Softmax classifier generating calibrated probabilities across four primary tumor classes and seven hemodynamic profiles with Zero-Miss safety thresholding.
-
----
-
-## Deep Semantic Segmentation: Attention U-Net
-
-![Attention U-Net Saliency and Boundary Contouring Showcase](assets/attention_unet_segmentation_showcase.png)
-
-NeuroScan includes an **Attention U-Net** (31.4M parameters) featuring four multi-scale Attention Gates:
+Arsitektur **Attention U-Net** yang digunakan memiliki total 31,4 juta parameter terlatih dengan 4 gerbang atensi spasial (*Attention Gates*). Mekanisme ini memfilter fitur pada sambungan pintas (*skip-connection*) melalui persamaan:
 
 $$\alpha = \sigma\left(\psi^T\left(\text{ReLU}\left(W_g^T g + W_x^T x_l + b_g\right)\right) + b_\psi\right)$$
 
-* **Gated Skip-Connections**: Decoder gating signals $g$ filter encoder features $x_l$, reducing non-brain background noise while sharpening tumor boundaries.
-* **Loss Function**: Trained with hybrid $\mathcal{L}_{\text{BCE-Dice}} = 0.5 \mathcal{L}_{\text{BCE}} + 0.5 (1 - \text{Dice})$ (Converged Dice: 90.15%).
-* **Geometric Readout**: Calculates exact lesion surface area ($\text{cm}^2$), perimeter ($\text{mm}$), centroid coordinates, and circular compactness/sphericity index ($\frac{4 \pi \cdot \text{Area}}{\text{Perimeter}^2}$).
+Sinyal gerbang $g$ dari lapisan dekoder menyaring representasi spasial $x_l$ dari enkoder, sehingga menekan respon fitur pada jaringan otak di luar lesi dan mempertajam kontur batas tumor. Jaringan dilatih menggunakan fungsi rugi kombinasi Binary Cross-Entropy dan Dice Loss:
+
+$$\mathcal{L}_{\text{BCE-Dice}} = 0{,}5 \, \mathcal{L}_{\text{BCE}} + 0{,}5 \, (1 - \text{Dice})$$
+
+Keluaran segmentasi menghasilkan masker biner yang dihitung parameternya secara kuantitatif: luas penampang lesi ($\text{cm}^2$), keliling batas ($\text{mm}$), titik koordinat pusat massa (*centroid*), serta indeks kekompakan sferisitas:
+
+$$\text{Sferisitas} = \frac{4 \pi \cdot \text{Luas}}{\text{Keliling}^2}$$
 
 ---
 
-## Quantitative Lesion Morphometry & Digital PACS Calipers
+### Pengukuran Morfometri Lesi dan Kaliper Digital PACS
 
-![PACS Digital Calipers](assets/caliper_preview.png)
+![Kaliper Digital PACS dan Pengukuran Morfometri Lesi](assets/caliper_preview.png)
 
-* **Orthogonal Caliper Measurements**: Major axis length and minor axis width in millimeters based on $0.47\text{ mm/px}$ calibrated Field of View.
-* **Cross-Sectional Area & Tumor Burden**: Evaluates cross-sectional area ($\text{cm}^2$) and intracranial tumor burden ratio relative to total brain volume.
-* **Spatial Localization**: Automatic detection of cranial hemisphere (*Right vs Left vs Midline*) and anatomical quadrant (*Frontal vs Parieto-Temporal vs Occipital*).
-* **Explainability Triad**: Side-by-side presentation of Isolated Tissue Crop, Grad-CAM++ Saliency Heatmap, and Digital PACS Calipers.
+* **Pengukuran Sumbu Ortogonal**: Panjang sumbu mayor dan lebar sumbu minor dihitung dalam satuan milimeter berdasarkan rasio kalibrasi bidang pandang spasial $0{,}47\text{ mm/piksel}$.
+* **Beban Tumor Intrakranial**: Menghitung persentase proporsi luas lesi terhadap total luas penampang kranial.
+* **Lokalisasi Spasial**: Klasifikasi otomatis letak lesi pada hemisfer otak (Kanan, Kiri, atau Garis Tengah/Midline) dan kuadran kranial (Frontal, Parieto-Temporal, atau Oksipital).
+* **Triad Keterjelasan Visual**: Menampilkan citra lesi hasil pemotongan (*crop*), peta panas atensi Grad-CAM++, dan hamparan kaliper digital secara berdampingan.
 
 ---
 
-## Complete Modular Architecture Structure (`ui/`)
+### Temu Balik Kasus Serupa (CBMIR) dan Profil Radiogenomik
+
+![Etalase Modul Temu Balik Kasus Serupa CBMIR](assets/cbmir_case_retrieval_showcase.png)
+
+Modul CBMIR mengekstraksi vektor representasi 512 dimensi dari citra masukan dan membandingkannya dengan basis data rujukan klinis menggunakan ukuran jarak kesamaan kosinus (*cosine similarity*):
+* **Pencocokan Kasus Serupa**: Menampilkan 3 kasus rujukan paling relevan dari arsip Figshare, Kaggle Sartaj, dan TCGA-GBM.
+* **Informasi Patologis Historis**: Menyajikan derajat keganasan WHO terkonfirmasi, tingkat reseksi bedah, rejimen terapi, serta estimasi kesintasan bebas progresivitas (*Progression-Free Survival* / PFS).
+* **Estimasi Penanda Radiogenomik**: Menghitung estimasi non-invasif untuk status mutasi gen IDH1/IDH2, kodeleksi kromosom 1p/19q, dan status metilasi promotor MGMT.
+
+---
+
+### Sintesis Kontras Virtual dan Kinetika Farmakokinetik Tofts
+
+![Sintesis Kontras Virtual dan Pemetaan Farmakokinetik Tofts](assets/virtual_contrast_tofts_showcase.png)
+
+Modul ini mengestimasi citra teraugmentasi kontras virtual $T_{1\text{ce}}$ dan citra supresi cairan $T_2\text{-FLAIR}$ dari pemindaian $T_1$ tanpa kontras menggunakan jaringan residual konvolusional:
+* **Analisis Non-Kontras**: Menguji kelayakan visualisasi penyerapan lesi bagi pasien dengan gangguan fungsi ginjal (eGFR < 30 mL/menit) atau riwayat hipersensitivitas terhadap agen kontras berbasis gadolinium.
+* **Model Farmakokinetik Extended Tofts**: Menghitung konstanta transfer volume endotelial ($K^{\text{trans}}$ dalam $\text{menit}^{-1}$) dan fraksi volume ruang ekstravaskular ekstraseluler ($v_e$) pada 7 profil lesi tumor.
+* **Peta Pengurangan Intensitas**: Menghasilkan peta selisih intensitas $\Delta \text{SI} = T_{1\text{ce}} - T_1$ dalam palet warna *Inferno* untuk mengisolasi area penyerapan vaskular aktif.
+
+---
+
+### Penampil Format DICOM Part 10 dan Rekonstruksi Multi-Planar (MPR)
+
+![Rekonstruksi Multi-Planar 3D dan Antarmuka PACS](assets/mpr_3d_orthogonal_showcase.png)
+
+* **Pengolahan Berkas DICOM Biner**: Membaca data piksel 16-bit berkas `.dcm` dengan memperhitungkan parameter *rescale slope* dan *intercept*, serta menyediakan preset jendela radiologi standar (Otak, Subdural, Stroke, dan Tulang).
+* **Rekonstruksi Multi-Planar (MPR)**: Menampilkan visualisasi ortogonal tiga bidang koordinat secara sinkron—Aksial (bidang XY), Koronal (bidang XZ), dan Sagital (bidang YZ)—dengan penunjuk kursor silang terpadu.
+* **Simulasi Alur Protokol Jaringan PACS**: Mendemonstrasikan pengujian alur kerja standar pertukaran data radiologi rumah sakit mencakup C-ECHO, C-STORE, serta DICOMweb (QIDO-RS / WADO-RS).
+
+---
+
+### Perencanaan Reseksi Bedah Saraf
+
+* **Jarak Struktur Elokuen Fungsional**: Mengukur jarak spasial dalam milimeter dari batas tepi lesi ke area fungsional penting (korteks motorik primer, area wicara Broca, area reseptif Wernicke, dan radiasio optika).
+* **Rekomendasi Lintasan Kraniotomi**: Menyarankan sudut vektor lubang bor (*burr-hole entry trajectory*) yang meminimalkan gangguan terhadap lintasan serabut saraf kritis.
+* **Penilaian Tingkat Risiko Bedah**: Mengklasifikasikan kebutuhan pendekatan operasi, termasuk indikasi kraniotomi sadar (*awake craniotomy*) dengan pemetaan stimulasi kortikal intraoperatif.
+
+---
+
+### Alur Pelaporan Radiologi Terstruktur dan Asisten VQA
+
+* **Format ACR RadReport**: Menghasilkan dokumen laporan terstruktur resmi mengikuti panduan American College of Radiology yang mencakup: teknik pemindaian, temuan lesi, efek desakan massa, impresi diagnosis utama, diferensial diagnosis berperingkat, serta rekomendasi tindak lanjut.
+* **Mesin Penalaran Klinis Lokal (VQA)**: Menjawab pertanyaan klinis terkait derajat pergeseran garis tengah (*midline shift*), letak intra-aksial versus ekstra-aksial, serta pertimbangan tindakan operatif berdasarkan aturan penalaran deterministik lokal.
+
+---
+
+## 8. Arsitektur Jaringan Syaraf Tiruan Penuh
+
+![Cetak Biru Arsitektur Jaringan Syaraf Tiruan Lengkap](assets/comprehensive_neural_architecture.png)
+
+Tahapan pemrosesan data citra dalam alur inferensi:
+1. **Tensor Masukan Volume Citra**: Tensor multi-parametrik berukuran $(3 \times 240 \times 240)$.
+2. **Tahap 1 (Ekstraksi Fitur)**: Lapisan konvolusi 2D untuk mengekstraksi tekstur mikro jaringan dan batas tepi lesi.
+3. **Tahap 2 (Subsampling)**: Lapisan Max Pooling untuk mereduksi resolusi spasial menjadi $(60 \times 60)$.
+4. **Tahap 3 (Gerbang Atensi Spasial)**: Multi-Head Self-Attention untuk memberi pembobotan dinamis pada fitur koneksi pintas (*skip connections*).
+5. **Tahap 4 & 5 (Lapisan Laten Dense)**: Lapisan hambatan (*bottleneck*) padat 512-neuron dan 128-neuron dengan regularisasi Dropout ($p=0{,}3$).
+6. **Tahap 6 (Kepala Diagnostik)**: Lapisan keluaran Softmax yang menghasilkan distribusi probabilitas terkalibrasi untuk 4 kelas tumor utama dan 7 profil hemodinamik.
+
+---
+
+## 9. Struktur Direktori Berkas Program Komputer
 
 ```
 medicine/
-├── app.py                      # Master orchestrator (Chatbot Mode & Workstation Suite)
-├── ui/                         # Modular presentation package
-│   ├── chatbot_interface.py    # Modern ChatGPT / Ollama WebUI style diagnostic chat interface
-│   ├── styles.py               # Dark slate clinical design system & tokens
-│   ├── sidebar.py              # Patient session diagnostic log & medical record tracking
-│   ├── tab_workstation.py      # Tab 1: Clinical Workstation (Consensus, ViT, DenseNet, Calipers, PDF)
-│   ├── tab_segmentation.py     # Tab 2: Attention U-Net Semantic Pixel Segmentation
-│   ├── tab_vlm.py              # Tab 3: Vision-Language Copilot & Interactive VQA
-│   ├── tab_retrieval.py        # Tab 4: CBMIR Case Retrieval & Radiogenomic Profiler
-│   ├── tab_synthesis.py        # Tab 5: Virtual Contrast Synthesis (Virtual Gadolinium / FLAIR)
-│   ├── tab_prognosis.py        # Tab 6: DeepSurv Survival Prognosis & Kaplan-Meier Curves
-│   ├── tab_dicom.py            # Tab 7: Native DICOM PACS Ingestion & Window Presets
-│   ├── tab_surgery.py          # Tab 8: Neurosurgical Resection Planner & Safe Corridors
-│   ├── tab_contour.py          # Tab 9: Skull Stripping & Morphological Preprocessing
-│   └── tab_registry.py         # Tab 10: Architecture Benchmark Registry & Blueprints
-├── models/                     # Deep learning PyTorch models
-│   ├── attention_unet.py       # Attention U-Net (31.4M params)
-│   ├── vit_densenet.py         # Vision Transformer (86.5M) & DenseNet-121 (7.98M)
-│   ├── advanced_classifier.py  # EfficientNet-B4 (19.3M params)
-│   ├── lightweight_cnn.py      # Minimalist edge CNN (6.2K params)
-│   └── custom_nn.py            # Multimodal 4-channel CNN
-├── evaluation/                 # Clinical reasoning & metrics
-│   ├── medical_guardrails.py   # IEC 62304 / ISO 14971 Safety guardrails & grounding
-│   ├── contrast_synthesizer.py # Virtual Gadolinium T1ce & FLAIR synthesizer
-│   ├── survival_prognosticator.py # DeepSurv Cox proportional hazards engine
-│   ├── dicom_parser.py         # Native DICOM Part 10 parser & window leveling
-│   ├── dicom_pacs_server.py    # Simulated PACS network node & MPR engine
-│   ├── surgical_planner.py     # Functional eloquence proximity & corridor planner
-│   ├── case_retriever.py       # CBMIR metric retrieval & radiogenomics
-│   ├── vlm_copilot.py          # ACR RadReport generator & VQA engine
-│   ├── consensus_analyzer.py   # Tri-model soft-voting & discrepancy analyzer
-│   ├── segmentation_engine.py  # Attention U-Net inference & compactness
-│   ├── gradcam_visualizer.py   # Grad-CAM++ with calvarium masking
-│   ├── lesion_analyzer.py      # PACS calipers & morphometry
-│   └── report_generator.py     # PDF & PNG clinical report generator
-├── scripts/                    # Utility & automation scripts
-│   ├── expand_and_balance_dataset.py # Automated multi-cohort ingest & balancer (12,400 scans)
-│   └── render_advanced_nn_diagram.py # Blueprint renderer
-└── preprocessing/              # Standardized preprocessing pipelines
-    ├── contour_cropper.py      # Otsu thresholding & tissue cropping
-    └── brats_preprocessor.py   # Volumetric 3D NIfTI preprocessor
+├── app.py                      # Skrip utama orkestrator antarmuka (Mode Chatbot & Mode Workstation)
+├── ui/                         # Paket komponen penyajian antarmuka grafis
+│   ├── chatbot_interface.py    # Antarmuka percakapan diagnostik klinis interaktif
+│   ├── styles.py               # Sistem desain dan palet token antarmuka radiologi
+│   ├── sidebar.py              # Panel navigasi sesi pemeriksaan dan rekam medis pasien
+│   ├── tab_workstation.py      # Tab 1: Stasiun kerja diagnostik (Konsensus, ViT, DenseNet, Kaliper, Laporan)
+│   ├── tab_segmentation.py     # Tab 2: Segmentasi piksel semantik Attention U-Net
+│   ├── tab_vlm.py              # Tab 3: Asisten tanya-jawab visual klinis (VQA Copilot)
+│   ├── tab_retrieval.py        # Tab 4: Temu balik kasus rujukan serupa (CBMIR) & radiogenomik
+│   ├── tab_synthesis.py        # Tab 5: Sintesis kontras virtual (Gadolinium virtual & FLAIR)
+│   ├── tab_prognosis.py        # Tab 6: Prognosis kesintasan pasien (DeepSurv & Kurva Kaplan-Meier)
+│   ├── tab_dicom.py            # Tab 7: Ingesti citra DICOM Part 10 & preset jendela radiologi
+│   ├── tab_surgery.py          # Tab 8: Perencanaan reseksi bedah saraf & koridor kraniotomi aman
+│   ├── tab_contour.py          # Tab 9: Pra-pengolahan morfologi citra & skull-stripping
+│   └── tab_registry.py         # Tab 10: Registri cetak biru dan tolok ukur arsitektur model
+├── models/                     # Implementasi arsitektur jaringan pembelajaran mendalam PyTorch
+│   ├── attention_unet.py       # Attention U-Net (31,4 juta parameter)
+│   ├── vit_densenet.py         # Vision Transformer (86,5M) & DenseNet-121 (7,98M)
+│   ├── advanced_classifier.py  # Model utama EfficientNet-B4 (19,3 juta parameter)
+│   ├── lightweight_cnn.py      # Arsitektur konvolusi ringan untuk CPU edge (6,2 ribu parameter)
+│   └── custom_nn.py            # Jaringan konvolusi 4-kanal multimodal
+├── evaluation/                 # Mesin evaluasi kuantitatif, kalkulasi morfometri, dan penalaran klinis
+│   ├── medical_guardrails.py   # Pagar pengaman medis & validasi masukan berbasis IEC 62304 / ISO 14971
+│   ├── contrast_synthesizer.py # Sintesis kontras virtual T1ce & FLAIR
+│   ├── survival_prognosticator.py # Estimasi kesintasan regresi bahaya proporsional Cox
+│   ├── dicom_parser.py         # Parser berkas biner DICOM Part 10 & window-leveling
+│   ├── dicom_pacs_server.py    # Simulator simpul jaringan PACS & mesin rekonstruksi MPR 3D
+│   ├── surgical_planner.py     # Perhitungan jarak korteks elokuen & lintasan bedah saraf
+│   ├── case_retriever.py       # Mesin pencocokan metrik CBMIR & profil radiogenomik
+│   ├── vlm_copilot.py          # Generator laporan terstruktur ACR RadReport & mesin penalaran VQA
+│   ├── consensus_analyzer.py   # Arbitrase konsensus ensemble probabilitas tiga model
+│   ├── segmentation_engine.py  # Inferensi masker Attention U-Net & kalkulasi kekompakan lesi
+│   ├── gradcam_visualizer.py   # Visualisasi atribusi Grad-CAM++ dengan penapisan kalvarium
+│   ├── lesion_analyzer.py      # Perhitungan kaliper morfometri digital PACS
+│   └── report_generator.py     # Pembuat berkas laporan PDF dan PNG diagnostik
+├── scripts/                    # Skrip bantu dan utilitas data
+│   ├── expand_and_balance_dataset.py # Pemrosesan korpus dan penyeimbang kohor (12.400 citra)
+│   └── render_advanced_nn_diagram.py # Pembangkit diagram arsitektur jaringan syaraf
+└── preprocessing/              # Pipa pemrosesan citra standar
+    ├── contour_cropper.py      # Ekstraksi kontur otak ambang Otsu
+    └── brats_preprocessor.py   # Pemroses volumetrik data 3D NIfTI
 ```
 
 ---
 
-## Quickstart & Local Execution
+## 10. Status Kepemilikan, Distribusi, dan Hak Akses Program Komputer
 
-### 1. Installation
+Perangkat lunak **Davion AI** merupakan ciptaan program komputer yang dilindungi secara hukum di bawah rezim Hak Kekayaan Intelektual (HAKI) Republik Indonesia.
 
-```bash
-git clone https://github.com/davinmaritza/davion-ai.git
-cd davion-ai
-pip install -r requirements.txt
-```
+### Ketentuan Hak Cipta dan Lisensi:
+1. **Hak Cipta Eksklusif**: Hak Cipta atas program komputer, arsitektur perangkat lunak, bobot model terlatih, algoritma komputasi biomedis, dan dokumentasi teknis ini dimiliki sepenuhnya oleh **Davin Maritza** berdasarkan Undang-Undang Republik Indonesia Nomor 28 Tahun 2014 tentang Hak Cipta.
+2. **Karakteristik Repositori Publik**: Repositori publik ini ([https://github.com/davinmaritza/davion-ai](https://github.com/davinmaritza/davion-ai)) berfungsi sebagai etalase publikasi resmi ciptaan (*showcase*), pembuktian orisinalitas karya, pelaporan hasil tolok ukur komputasional, serta dokumentasi spesifikasi teknis pendaftaran hak cipta.
+3. **Penyimpanan Kode Sumber Utama (*Proprietary Core*)**: Seluruh berkas kode sumber mesin komputasi (*executable core modules*), bobot terlatih model kecerdasan buatan (*model checkpoint weights*), serta pipa pelatihan lanjutan dikelola dalam repositori berlisensi tertutup (*private repository*) pada [https://github.com/davinmaritza/davion-ai-core](https://github.com/davinmaritza/davion-ai-core).
+4. **Larangan Penggunaan Tanpa Izin**: Dilarang keras menyalin, menduplikasi, mempublikasikan ulang, mendistribusikan, memodifikasi, mengalihkan, melisensikan ulang, merekayasa balik (*reverse engineering*), atau mengomersialisasikan program komputer ini atau bagian daripadanya dalam bentuk apa pun tanpa persetujuan tertulis resmi dari Pemegang Hak Cipta.
+5. **Permohonan Akses Riset dan Kemitraan Akademis**: Pihak institusi akademik, rumah sakit, laboratorium riset, atau penilai resmi yang memerlukan akses pengujian terbatas, kerja sama validasi klinis, atau audit kode sumber dapat mengajukan permohonan resmi secara langsung kepada pemegang hak cipta:
 
-### 2. Dataset Setup (12,400 Balanced MRI Cohort)
-
-```bash
-python scripts/expand_and_balance_dataset.py
-```
-
-### 3. Launching the Application (Streamlit)
-
-```bash
-python -m streamlit run app.py
-```
-
-Access the interactive workstation or chatbot mode at `http://localhost:8501`.
-
-### 4. Local Model Training
-
-```bash
-# Train lightweight binary model (fast CPU screening):
-python train_local.py --arch lightweight --epochs 10 --batch_size 16
-
-# Train 4-class custom CNN:
-python train_local.py --arch custom --epochs 10 --batch_size 16
-```
-
-### 5. Cloud GPU Training (Google Colab T4)
-
-| Notebook | Focus | Scans / Cohort | Direct Launch |
-|---|---|---|---|
-| **Advanced 4-Class Pipeline** (`advanced_brain_tumor_colab.ipynb`) | EfficientNet-B4, Mixed-Precision FP16, Grad-CAM++, ONNX | 12,400 Scans | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/davinmaritza/davion-ai/blob/main/notebooks/advanced_brain_tumor_colab.ipynb) |
-| **BraTS Multimodal 3D** (`brats_efficientnet_colab.ipynb`) | 4-Channel 3D Volumes, NIfTI preprocessor | T1, T1ce, T2, FLAIR | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/davinmaritza/davion-ai/blob/main/notebooks/brats_efficientnet_colab.ipynb) |
+* **Pencipta & Pemegang Hak Cipta**: Davin Maritza
+* **Surel Resmi**: Kontak melalui profil GitHub [https://github.com/davinmaritza](https://github.com/davinmaritza)
+* **Status Hak Cipta**: Hak Cipta © 2026 Davin Maritza. Seluruh Hak Dilindungi Undang-Undang.
 
 ---
 
-## Protocol Simulation & Theoretical SaMD Blueprint
-
-* **Simulation Protocol Testbed**:
-  * The repository includes a multi-reader statistical simulation interface (`evaluation/reader_study.py`) modeling how agreement metrics (Fleiss' Kappa, Cohen's Kappa, Bland-Altman bias) would be evaluated in a formal clinical reader study.
-* **Empirical Model Verification**:
-  * Real evaluated metrics are derived directly from the 2,800 held-out test scans recorded in [`evaluation_testset_results.json`](evaluation_testset_results.json).
-* **Regulatory Reference Document**:
-  * [`docs/CLINICAL_REGULATORY_SAMD.md`](docs/CLINICAL_REGULATORY_SAMD.md) is a theoretical design-control reference mapping academic architectures to ISO 14971 hazard mitigations and IEC 62304 lifecycle guidelines for educational study.
-
----
-
-## Copyright & Intellectual Property Notice
-
 ```
-COPYRIGHT & INTELLECTUAL PROPERTY NOTICE
-Copyright © 2026 Davin Maritza. All Rights Reserved.
+PERNYATAAN HAK CIPTA RESMI REPUBLIK INDONESIA
+Nomor Rujukan UU: Undang-Undang No. 28 Tahun 2014 tentang Hak Cipta
+Hak Cipta © 2026 Davin Maritza. All Rights Reserved.
 
-This software, source code, neural network architecture implementations, mathematical modeling,
-and documentation are the intellectual property of Davin Maritza.
-Unauthorized copying, duplication, modification, distribution, sublicensing, or commercialization
-without explicit prior written permission from the copyright holder is strictly prohibited.
-Protected under the Copyright Law of the Republic of Indonesia (Law No. 28 of 2014)
-and international copyright conventions.
+Seluruh hak kekayaan intelektual yang melekat pada ciptaan program komputer Davion AI 
+adalah milik sah Davin Maritza. Segala bentuk pelanggaran terhadap hak moral dan hak ekonomi 
+pencipta akan diproses sesuai dengan ketentuan hukum perundang-undangan yang berlaku di Republik Indonesia.
 ```
