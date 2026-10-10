@@ -1,4 +1,4 @@
-# CerebroMaritza CADx: Sistem Perangkat Lunak Kecerdasan Buatan untuk Deteksi, Klasifikasi, dan Segmentasi Citra MRI Tumor Otak
+# Persijple CADx: Sistem Perangkat Lunak Kecerdasan Buatan untuk Deteksi, Klasifikasi, dan Segmentasi Citra MRI Tumor Otak
 
 > **DOKUMEN SPESIFIKASI DAN DESKRIPSI CIPTAAN PROGRAM KOMPUTER**  
 > **HAK CIPTA DILINDUNGI UNDANG-UNDANG REPUBLIK INDONESIA (UU NO. 28 TAHUN 2014)**  
@@ -6,17 +6,10 @@
 
 ---
 
-> [!IMPORTANT]
-> **REPOSITORI PAMERAN RESMI & DOKUMENTASI HAK CIPTA (OFFICIAL SHOWCASE REPOSITORY)**  
-> Repositori publik ini berfungsi secara khusus sebagai etalase publik, dokumentasi spesifikasi, dan arsip pencatatan hak kekayaan intelektual (HKI) untuk **CerebroMaritza CADx** karya **Davin Maritza**.  
-> **Seluruh kode sumber aplikasi inti (core application engine), arsitektur model neural network, dan bobot terlatih (weights) dilindungi secara eksklusif dan disimpan di repositori privat (`davinmaritza/cerebromaritza-cadx`).** Dilarang keras menyalin, merekayasa balik, atau memperbanyak tanpa izin tertulis dari Pemegang Hak Cipta.
-
----
-
 ## 🇮🇩 Bagian I: Deskripsi Ciptaan Resmi (Pencatatan Hak Cipta)
 
 ### 1. Metadata Hak Cipta Ciptaan Program Komputer
-* **Judul Ciptaan**: CerebroMaritza CADx: Sistem Perangkat Lunak Kecerdasan Buatan untuk Deteksi, Klasifikasi, dan Segmentasi Citra MRI Tumor Otak
+* **Judul Ciptaan**: Persijple CADx: Sistem Perangkat Lunak Kecerdasan Buatan untuk Deteksi, Klasifikasi, dan Segmentasi Citra MRI Tumor Otak
 * **Jenis Ciptaan**: Program Komputer (Software as a Medical Device Research Prototype)
 * **Pencipta**: Davin Maritza
 * **Pemegang Hak Cipta**: Davin Maritza
@@ -28,7 +21,7 @@
 ---
 
 ### 2. Ringkasan & Uraian Teknis Ciptaan
-**CerebroMaritza CADx** merupakan karya cipta perangkat lunak sistem cerdas (*intelligent diagnostic workstation & pipeline builder*) berbasis komputasi kecerdasan buatan (*Artificial Intelligence / Deep Learning*) yang dirancang khusus oleh Davin Maritza untuk memproses, menganalisis, mengklasifikasi, dan mensegmentasi citra medis resonansi magnetik (*Magnetic Resonance Imaging / MRI*) kepala (cranial).
+**Persijple CADx** merupakan karya cipta perangkat lunak sistem cerdas (*intelligent diagnostic workstation & pipeline builder*) berbasis komputasi kecerdasan buatan (*Artificial Intelligence / Deep Learning*) yang dirancang khusus oleh Davin Maritza untuk memproses, menganalisis, mengklasifikasi, dan mensegmentasi citra medis resonansi magnetik (*Magnetic Resonance Imaging / MRI*) kepala (cranial).
 
 Perangkat lunak ini mengintegrasikan arsitektur *deep convolutional neural networks*, *vision transformers*, dan *semantic segmentation networks* dengan antarmuka stasiun kerja radiologi digital interaktif (PACS viewer, kaliper morfometri digital, visualisasi atribusi xAI Grad-CAM++, sintesis kontras virtual tanpa gadolinium, estimasi batas reseksi bedah saraf, serta asisten pelaporan terstruktur standar ACR RadReport otomatis).
 
@@ -92,17 +85,24 @@ Ciptaan program komputer ini terdiri atas serangkaian modul terintegrasi:
 
 ### 5. Panduan Instalasi dan Pengoperasian Singkat
 
-### 5. Panduan Repositori Pameran & Permintaan Akses Kode Sumber Inti
-
-Repositori publik ini merupakan **Etalase Resmi (*Official Showcase*) & Arsip Hak Kekayaan Intelektual** yang menyediakan:
-1. **Dokumen Proposal Proyek Resmi (PDF)**: [`Proposal_Aplikasi_CerebroMaritza_Davin_Maritza.pdf`](Proposal_Aplikasi_CerebroMaritza_Davin_Maritza.pdf) (Lengkap dengan latar belakang, spesifikasi, dan lembar pengesahan).
-2. **Dokumen Laporan Evaluasi Empiris Seluruh Model AI (PDF)**: [`Laporan_Evaluasi_Model_AI_NeuroScan.pdf`](Laporan_Evaluasi_Model_AI_NeuroScan.pdf).
-3. **Dokumen Kontrol Regulasi Medis SaMD**: [`docs/CLINICAL_REGULATORY_SAMD.md`](docs/CLINICAL_REGULATORY_SAMD.md) (IEC 62304 Safety Class B & ISO 14971).
-4. **Diagram Arsitektur & Bukti Visual**: Tersimpan lengkap di direktori `assets/`.
-
-> **AKSES REPOSITORI PRIVAT (FULL CORE CODEBASE)**:  
-> Seluruh kode sumber aplikasi lengkap (pipeline inferensi PyTorch, Attention U-Net, arsitektur UI Streamlit, REST API FastAPI, dan bobot neural network `.pth`) disimpan secara tertutup di repositori **`davinmaritza/cerebromaritza-cadx` (Private)**.  
-> Untuk keperluan evaluasi akademik resmi, audit institusi, atau perjanjian riset bersama, permohonan akses dapat diajukan langsung kepada **Davin Maritza**.
+1. **Mengunduh Repositori Kode Sumber**:
+   ```bash
+   git clone https://github.com/davinmaritza/medical-imaging-tumor-detection.git
+   cd medical-imaging-tumor-detection
+   ```
+2. **Pemasangan Dependensi**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. **Menjalankan Stasiun Kerja Diagnostik Interaktif (Streamlit)**:
+   ```bash
+   python -m streamlit run app.py
+   ```
+   Buka peramban web pada alamat `http://localhost:8501`.
+4. **Menjalankan Layanan REST API (FastAPI)**:
+   ```bash
+   python -m uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
+   ```
 
 ---
 
@@ -126,9 +126,9 @@ tentang Hak Cipta dan konvensi hak cipta internasional yang berlaku.
 
 ## 🇬🇧 Section II: Complete Technical Documentation & Engineering Specifications
 
-# CerebroMaritza CADx: Brain Tumor MRI Detection & Analysis Diagnostic Pipeline
+# Persijple CADx: Brain Tumor MRI Detection & Analysis Diagnostic Pipeline
 
-CerebroMaritza CADx provides an experimental end-to-end pipeline for cranial brain tumor MRI analysis, engineered by Davin Maritza. It connects trained deep learning classifiers (EfficientNet-B4) and semantic segmentation networks (Attention U-Net) with diagnostic workstation interfaces (DICOM viewing, heuristic surgical clearance estimations, digital PACS calipers, and templated ACR RadReport clinical reporting).
+Persijple CADx provides an experimental end-to-end pipeline for cranial brain tumor MRI analysis, engineered by Davin Maritza. It connects trained deep learning classifiers (EfficientNet-B4) and semantic segmentation networks (Attention U-Net) with diagnostic workstation interfaces (DICOM viewing, heuristic surgical clearance estimations, digital PACS calipers, and templated ACR RadReport clinical reporting).
 
 ---
 
@@ -341,23 +341,46 @@ medicine/
 
 ---
 
-## Repository Structure: Public Showcase vs. Private Core Architecture
+## Quickstart & Local Execution
 
-This public repository serves as the **Public Showcase & Official Intellectual Property Archive** for **CerebroMaritza CADx**:
+### 1. Installation
 
-| Component | Visibility | Location | Description |
+```bash
+git clone https://github.com/davinmaritza/medical-imaging-tumor-detection.git
+cd medical-imaging-tumor-detection
+pip install -r requirements.txt
+```
+
+### 2. Dataset Setup (12,400 Balanced MRI Cohort)
+
+```bash
+python scripts/expand_and_balance_dataset.py
+```
+
+### 3. Launching the Application (Streamlit)
+
+```bash
+python -m streamlit run app.py
+```
+
+Access the interactive workstation or chatbot mode at `http://localhost:8501`.
+
+### 4. Local Model Training
+
+```bash
+# Train lightweight binary model (fast CPU screening):
+python train_local.py --arch lightweight --epochs 10 --batch_size 16
+
+# Train 4-class custom CNN:
+python train_local.py --arch custom --epochs 10 --batch_size 16
+```
+
+### 5. Cloud GPU Training (Google Colab T4)
+
+| Notebook | Focus | Scans / Cohort | Direct Launch |
 |---|---|---|---|
-| **System Specifications & Benchmarks** | Public | This Repository (`README.md`) | Empirical validation on 2,800 scans, 12,400 balanced MRI cohort |
-| **Official Project Proposal (PDF)** | Public | [`Proposal_Aplikasi_CerebroMaritza_Davin_Maritza.pdf`](Proposal_Aplikasi_CerebroMaritza_Davin_Maritza.pdf) | Academic project proposal and copyright submission blueprint |
-| **Empirical Models Evaluation (PDF)** | Public | [`Laporan_Evaluasi_Model_AI_NeuroScan.pdf`](Laporan_Evaluasi_Model_AI_NeuroScan.pdf) | High-resolution evaluation matrix across all neural architectures |
-| **Regulatory SaMD Design Controls** | Public | [`docs/CLINICAL_REGULATORY_SAMD.md`](docs/CLINICAL_REGULATORY_SAMD.md) | IEC 62304 Safety Class B & ISO 14971 hazard mitigations |
-| **Visual Blueprints & HUD Previews** | Public | `assets/` | Comprehensive architectural blueprints, ROC curves, PACS calipers |
-| **Full Executable Core Codebase** | **Private** | `davinmaritza/cerebromaritza-cadx` | PyTorch models, Attention U-Net, Streamlit UI, FastAPI REST server |
-| **Trained Neural Weights (`.pth`)** | **Private** | `davinmaritza/cerebromaritza-cadx` | Verified model checkpoints (`best_multiclass_efficientnet.pth`, etc.) |
-
-> **RESTRICTED ACCESS NOTICE**:  
-> The complete application source code, neural network training loops, and proprietary checkpoints are maintained in the private repository **`davinmaritza/cerebromaritza-cadx` (Private)**.  
-> Direct access is strictly regulated under institutional review. For academic licensing, peer review, or research inquiries, contact **Davin Maritza**.
+| **Advanced 4-Class Pipeline** (`advanced_brain_tumor_colab.ipynb`) | EfficientNet-B4, Mixed-Precision FP16, Grad-CAM++, ONNX | 12,400 Scans | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/davinmaritza/medical-imaging-tumor-detection/blob/main/notebooks/advanced_brain_tumor_colab.ipynb) |
+| **BraTS Multimodal 3D** (`brats_efficientnet_colab.ipynb`) | 4-Channel 3D Volumes, NIfTI preprocessor | T1, T1ce, T2, FLAIR | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/davinmaritza/medical-imaging-tumor-detection/blob/main/notebooks/brats_efficientnet_colab.ipynb) |
 
 ---
 
