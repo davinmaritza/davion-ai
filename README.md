@@ -1,16 +1,138 @@
-# NeuroScan: Brain Tumor MRI Detection & Analysis Prototype
+# CerebroMaritza CADx: Sistem Perangkat Lunak Kecerdasan Buatan untuk Deteksi, Klasifikasi, dan Segmentasi Citra MRI Tumor Otak
 
-> [!WARNING]
-> **RESEARCH & EDUCATIONAL PROTOTYPE · NOT FOR CLINICAL USE**
-> NeuroScan is an academic feasibility prototype and software engineering demonstration. It is **not** a cleared medical device and is **not intended for clinical diagnosis, patient management, or surgical guidance**. All models were evaluated on public research datasets and require independent medical validation.
-
-NeuroScan provides an experimental pipeline for brain tumor MRI analysis. It connects trained deep learning classifiers (EfficientNet-B4) and segmentation networks (Attention U-Net) with experimental diagnostic workstation interfaces (DICOM viewing, heuristic surgical clearance estimations, and templated reporting).
+> **DOKUMEN SPESIFIKASI DAN DESKRIPSI CIPTAAN PROGRAM KOMPUTER**  
+> **HAK CIPTA DILINDUNGI UNDANG-UNDANG REPUBLIK INDONESIA (UU NO. 28 TAHUN 2014)**  
+> **PENCIPTA & PEMEGANG HAK CIPTA: DAVIN MARITZA © 2026. ALL RIGHTS RESERVED.**
 
 ---
 
-## Technical Status: Trained Weights vs. Prototypes
+> [!IMPORTANT]
+> **REPOSITORI PAMERAN RESMI & DOKUMENTASI HAK CIPTA (OFFICIAL SHOWCASE REPOSITORY)**  
+> Repositori publik ini berfungsi secara khusus sebagai etalase publik, dokumentasi spesifikasi, dan arsip pencatatan hak kekayaan intelektual (HKI) untuk **CerebroMaritza CADx** karya **Davin Maritza**.  
+> **Seluruh kode sumber aplikasi inti (core application engine), arsitektur model neural network, dan bobot terlatih (weights) dilindungi secara eksklusif dan disimpan di repositori privat (`davinmaritza/cerebromaritza-cadx`).** Dilarang keras menyalin, merekayasa balik, atau memperbanyak tanpa izin tertulis dari Pemegang Hak Cipta.
 
-To maintain engineering clarity, the codebase is divided into verified model weights and experimental proof-of-concept interfaces:
+---
+
+## 🇮🇩 Bagian I: Deskripsi Ciptaan Resmi (Pencatatan Hak Cipta)
+
+### 1. Metadata Hak Cipta Ciptaan Program Komputer
+* **Judul Ciptaan**: CerebroMaritza CADx: Sistem Perangkat Lunak Kecerdasan Buatan untuk Deteksi, Klasifikasi, dan Segmentasi Citra MRI Tumor Otak
+* **Jenis Ciptaan**: Program Komputer (Software as a Medical Device Research Prototype)
+* **Pencipta**: Davin Maritza
+* **Pemegang Hak Cipta**: Davin Maritza
+* **Tahun Penciptaan**: 2026
+* **Tanggal / Tempat Pertama Kali Diumumkan**: 2026, Indonesia
+* **Repositori Resmi**: [https://github.com/davinmaritza/medical-imaging-tumor-detection](https://github.com/davinmaritza/medical-imaging-tumor-detection)
+* **Status Lisensi**: Proprietary — Hak Cipta Dilindungi Undang-Undang (*All Rights Reserved*)
+
+---
+
+### 2. Ringkasan & Uraian Teknis Ciptaan
+**CerebroMaritza CADx** merupakan karya cipta perangkat lunak sistem cerdas (*intelligent diagnostic workstation & pipeline builder*) berbasis komputasi kecerdasan buatan (*Artificial Intelligence / Deep Learning*) yang dirancang khusus oleh Davin Maritza untuk memproses, menganalisis, mengklasifikasi, dan mensegmentasi citra medis resonansi magnetik (*Magnetic Resonance Imaging / MRI*) kepala (cranial).
+
+Perangkat lunak ini mengintegrasikan arsitektur *deep convolutional neural networks*, *vision transformers*, dan *semantic segmentation networks* dengan antarmuka stasiun kerja radiologi digital interaktif (PACS viewer, kaliper morfometri digital, visualisasi atribusi xAI Grad-CAM++, sintesis kontras virtual tanpa gadolinium, estimasi batas reseksi bedah saraf, serta asisten pelaporan terstruktur standar ACR RadReport otomatis).
+
+> [!WARNING]
+> **PENYATAAN BATASAN DAN PENGGUNAAN RISET (RESEARCH & EDUCATIONAL PROTOTYPE)**  
+> Perangkat lunak ini diciptakan sebagai karya inovasi rekayasa perangkat lunak, bukti kelayakan ilmiah (*proof of concept*), dan alat bantu riset akademis (*in-silico prototype*). Program ini **bukan pengganti pertimbangan klinis langsung dokter spesialis radiologi atau dokter spesialis bedah saraf** dan belum melalui sertifikasi alat kesehatan komersial mandiri. Seluruh hasil rekomendasi model kecerdasan buatan wajib diverifikasi oleh tenaga medis berwenang.
+
+---
+
+### 3. Modul dan Komponen Utama Program Komputer
+
+Ciptaan program komputer ini terdiri atas serangkaian modul terintegrasi:
+
+1. **Modul Pengolahan Citra Medis (*Medical Preprocessing & Skull-Stripping*)**:
+   - Pemotongan kontur otak otomatis (*Otsu adaptive thresholding*) pada irisan aksial.
+   - Normalisasi Z-score voxel intensitas dan penyelarasan resolusi spasial isotropik 1mm untuk format DICOM Part 10 dan NIfTI ($T_1, T_{1\text{ce}}, T_2, \text{FLAIR}$).
+2. **Modul Klasifikasi Multi-Paradigma (*Deep Learning Classifiers*)**:
+   - **EfficientNet-B4**: Jaringan konvolusional dalam dengan *Squeeze-and-Excitation attention blocks* untuk membedakan 4 kategori: *Glioma*, *Meningioma*, *Pituitary Adenoma*, dan *Normal Tissue*.
+   - **LightweightTumorCNN**: Arsitektur ringan 4-layer untuk penapisan awal berkecepatan tinggi pada prosesor CPU.
+   - **Vision Transformer (ViT-B/16)** & **DenseNet-121**: Model inferensi multi-paradigma pendukung konsensus klinis.
+3. **Modul Arbitrase Konsensus & Deteksi Diskrepansi (*Consensus Analyzer*)**:
+   - Penggabungan probabilitas *soft-voting ensemble* lintas 3 paradigma model dengan indeks konkordansi (*Unanimous, Majority, Divergent*) dan peringatan variansi model ($\bar{\sigma} > 0.15$).
+4. **Modul Segmentasi Semantik Lesi (*Attention U-Net*)**:
+   - Jaringan U-Net dengan 4 *Attention Gates* untuk menghasilkan kontur mask piksel tumor berpresisi tinggi dan perhitungan metrik kekompakan/sferisitas lesi.
+5. **Modul Keterjelasan AI (*Explainable AI / Grad-CAM++*)**:
+   - Peta panas atribusi gradien (*saliency heatmap*) dengan masking kalvarium tengkorak adaptif untuk membuktikan fokus diagnosis model berpusat pada lesi jaringan parenkim riil.
+6. **Modul Jangka Ukur Morfometri Digital PACS (*Digital PACS Calipers*)**:
+   - Kaliper ortogonal digital otomatis pengukur diameter mayor dan minor (mm), perhitungan luas penampang ($\text{cm}^2$), rasio beban tumor intrakranial (%), dan lokalisasi hemisfer/kuadran anatomis.
+7. **Modul Pencarian Kasus Mirip & Radiogenomik (*CBMIR & Radiogenomics*)**:
+   - Pemetaan representasi vektor 512-dimensi (*cosine similarity*) untuk menemukan 3 riwayat kasus klinis paling identik (*clinical twins*) dari basis data acuan beserta prediksi penanda molekuler (mutasi IDH1/IDH2, kodeleksi 1p/19q, dan metilasi MGMT).
+8. **Modul Sintesis Kontras Virtual (*Generative MRI Physics & Extended Tofts*)**:
+   - Estimasi citra kontras virtual $T_{1\text{ce}}$ dan penekanan cairan $T_2\text{-FLAIR}$ tanpa injeksi gadolinium, disertai kalkulasi parameter transfer volume vaskular ($K^{\text{trans}}$) dan fraksi volume interstisial ($v_e$).
+9. **Modul Perencanaan Bedah Saraf (*Neurosurgical Resection Planner*)**:
+   - Pengukuran jarak batas lesi ke area korteks elokuen fungsional (Motorik, Broca, Wernicke, Optik) serta pemetaan sudut vektor kraniotomi aman.
+10. **Modul Pelaporan Terstruktur & Asisten Percakapan VQA (*ACR RadReport & VLM Copilot*)**:
+    - Penyusunan otomatis lembar laporan radiologi resmi berstandar ACR (*Technique, Findings, Impression, Differential Diagnoses*) dan modul tanya-jawab klinis lokal (*deterministic reasoning engine*).
+11. **Modul Perlindungan & Keamanan Medis (*Medical Safety Guardrails*)**:
+    - Sanitasi masukan teks, pencegahan injeksi perintah (*jailbreak*), anonimisasi data identitas pasien (*PHI/PII masking*), serta verifikasi konsistensi keluaran berbasis prinsip IEC 62304 & ISO 14971.
+12. **Antarmuka Pengguna Terpadu (*Unified Streamlit Diagnostic Workstation & Chatbot*)**:
+    - Antarmuka web interaktif dengan mode percakapan modern (*Chatbot UI*) serta mode stasiun kerja radiologi 10 tab komprehensif.
+13. **Antarmuka Layanan Web API (*FastAPI REST Server*)**:
+    - Layanan *backend* berkinerja tinggi siap integrasi rumah sakit dengan skema validasi Pydantic.
+
+---
+
+### 4. Spesifikasi Kebutuhan Sistem Program Komputer
+
+* **Bahasa Pemrograman**: Python 3.10 / 3.11 / 3.12 / 3.14
+* **Pustaka & Kerangka Kerja Utama**:
+  * *Deep Learning & Komputasi Numerik*: PyTorch, Torchvision, NumPy, SciPy
+  * *Pengolahan Citra Medis*: OpenCV (`opencv-python-headless`), SimpleITK, NiBabel, Pydicom
+  * *Penyajian Antarmuka & Layanan*: Streamlit, FastAPI, Uvicorn, Pydantic, ReportLab, Matplotlib
+* **Lingkungan Sistem Operasi**: Microsoft Windows 10/11, Linux (Ubuntu/Debian/CentOS), macOS
+* **Kebutuhan Perangkat Keras Minimum**:
+  * Prosesor: Intel Core i5 / AMD Ryzen 5 (atau setara)
+  * Memori RAM: 8 GB (Direkomendasikan 16 GB)
+  * Ruang Penyimpanan: 5 GB ruang kosong
+  * Akselerasi Grafis (Opsional): GPU NVIDIA dengan CUDA untuk pelatihan ulang berkecepatan tinggi
+
+---
+
+### 5. Panduan Instalasi dan Pengoperasian Singkat
+
+### 5. Panduan Repositori Pameran & Permintaan Akses Kode Sumber Inti
+
+Repositori publik ini merupakan **Etalase Resmi (*Official Showcase*) & Arsip Hak Kekayaan Intelektual** yang menyediakan:
+1. **Dokumen Proposal Proyek Resmi (PDF)**: [`Proposal_Aplikasi_CerebroMaritza_Davin_Maritza.pdf`](Proposal_Aplikasi_CerebroMaritza_Davin_Maritza.pdf) (Lengkap dengan latar belakang, spesifikasi, dan lembar pengesahan).
+2. **Dokumen Laporan Evaluasi Empiris Seluruh Model AI (PDF)**: [`Laporan_Evaluasi_Model_AI_NeuroScan.pdf`](Laporan_Evaluasi_Model_AI_NeuroScan.pdf).
+3. **Dokumen Kontrol Regulasi Medis SaMD**: [`docs/CLINICAL_REGULATORY_SAMD.md`](docs/CLINICAL_REGULATORY_SAMD.md) (IEC 62304 Safety Class B & ISO 14971).
+4. **Diagram Arsitektur & Bukti Visual**: Tersimpan lengkap di direktori `assets/`.
+
+> **AKSES REPOSITORI PRIVAT (FULL CORE CODEBASE)**:  
+> Seluruh kode sumber aplikasi lengkap (pipeline inferensi PyTorch, Attention U-Net, arsitektur UI Streamlit, REST API FastAPI, dan bobot neural network `.pth`) disimpan secara tertutup di repositori **`davinmaritza/cerebromaritza-cadx` (Private)**.  
+> Untuk keperluan evaluasi akademik resmi, audit institusi, atau perjanjian riset bersama, permohonan akses dapat diajukan langsung kepada **Davin Maritza**.
+
+---
+
+### 6. Pernyataan Hak Cipta dan Ketentuan Lisensi
+
+```
+HAK CIPTA DILINDUNGI UNDANG-UNDANG
+Hak Cipta © 2026 Davin Maritza. Seluruh Hak Cipta Dilindungi (All Rights Reserved).
+
+Dilarang memperbanyak, menduplikasi, mempublikasikan ulang, mengalihkan, menyewakan, 
+atau mengomersialisasikan program komputer ini atau bagian daripadanya dalam bentuk apa pun, 
+baik secara elektronik maupun mekanik, termasuk rekayasa balik (reverse engineering), 
+tanpa persetujuan tertulis resmi dari Pemegang Hak Cipta (Davin Maritza).
+
+Karya cipta ini dilindungi oleh Undang-Undang Republik Indonesia Nomor 28 Tahun 2014 
+tentang Hak Cipta dan konvensi hak cipta internasional yang berlaku.
+```
+
+---
+---
+
+## 🇬🇧 Section II: Complete Technical Documentation & Engineering Specifications
+
+# CerebroMaritza CADx: Brain Tumor MRI Detection & Analysis Diagnostic Pipeline
+
+CerebroMaritza CADx provides an experimental end-to-end pipeline for cranial brain tumor MRI analysis, engineered by Davin Maritza. It connects trained deep learning classifiers (EfficientNet-B4) and semantic segmentation networks (Attention U-Net) with diagnostic workstation interfaces (DICOM viewing, heuristic surgical clearance estimations, digital PACS calipers, and templated ACR RadReport clinical reporting).
+
+---
+
+## Technical Status: Verified Weights vs. Workflow Prototypes
 
 | Component | Category | Current Status | Description |
 |---|---|---|---|
@@ -23,6 +145,7 @@ To maintain engineering clarity, the codebase is divided into verified model wei
 | **Case Retrieval (CBMIR)** | Feature Matching | Prototype | Nearest-case reference matching from a local catalog |
 | **Virtual Contrast & Survival** | Algorithmic Simulation | Experimental | Mathematical baseline simulations for UI prototyping |
 | **ACR RadReport & VQA** | Structured Templates | Active | Deterministic clinical report templating and local question answering |
+| **Medical Safety Guardrails** | Verification Engine | Active | IEC 62304 / ISO 14971 input sanitization & diagnostic grounding verifier |
 
 ---
 
@@ -41,8 +164,6 @@ Empirical evaluation results on the held-out test cohort (700 scans per class, e
 - **Meningioma (700 cases)**: 672 True Positives, 14 misclassified as Normal, 11 as Pituitary, 3 as Glioma.
 - **Normal Parenchyma (700 cases)**: 690 True Negatives, 7 misclassified as Meningioma, 3 as Glioma.
 - **Pituitary Adenoma (700 cases)**: 641 True Positives, 53 misclassified as Normal, 5 as Meningioma, 1 as Glioma.
-
-> **Clinical Reality Check**: While classification on Meningioma and Pituitary shows strong agreement, lower recall on infiltrative Glioma highlights the limitation of 2D axial slices on public datasets without calibrated multi-sequence 3D context. Real-world clinical adoption requires 3D volumetric scans and multi-institutional training data.
 
 ![Clinical Reader ROC Curves & 6-Axis Radar Benchmark](assets/clinical_reader_study_roc_radar.png)
 
@@ -69,10 +190,7 @@ The benchmark dataset consists of **12,400 balanced cranial MRI scans** (3,100 s
    * **Navoneel Chakrabarty Dataset**: Standard brain MRI tumor detection collection.
    * **The Cancer Genome Atlas (TCGA-LGG / Buda et al.)**: Lower-grade glioma FLAIR slices and genomic annotations.
 2. **Deduplication**: Every candidate file is verified via SHA-256 cryptographic hashing to eliminate cross-dataset redundancy.
-3. **Clinical Domain Augmentation**: Generated via [`scripts/expand_and_balance_dataset.py`](scripts/expand_and_balance_dataset.py) using hardware-accelerated OpenCV transforms:
-   * **Elastic Deformation**: Vectorized Gaussian displacement fields simulating brain soft-tissue anatomic variance.
-   * **RF Coil Noise & Gamma Variance**: Simulates 1.5T/3.0T Rician signal-to-noise fluctuations and T1/T2 pulse acquisition timing variations.
-   * **Scanner Gantry Shift**: Random sub-voxel affine translations and rotations ($\pm 10^\circ$).
+3. **Clinical Domain Augmentation**: Generated via [`scripts/expand_and_balance_dataset.py`](scripts/expand_and_balance_dataset.py) using hardware-accelerated OpenCV transforms (Elastic Deformation, RF Coil Noise, Gamma Variance, and Scanner Gantry Shift).
 
 ---
 
@@ -81,13 +199,9 @@ The benchmark dataset consists of **12,400 balanced cranial MRI scans** (3,100 s
 ![CBMIR Historical Case Retrieval Showcase](assets/cbmir_case_retrieval_showcase.png)
 
 When an MRI scan is uploaded, the retrieval module projects the image into a 512-dimensional feature embedding and runs cosine similarity matching against the reference dataset:
-
 * **Top-3 Clinical Twins**: Ranks and displays the three most morphologically similar verified cases from Figshare, Kaggle Sartaj, and TCGA-GBM.
-* **Histopathology & Outcomes**: Shows confirmed WHO classification, surgical resection grade (Gross Total vs Subtotal), chemotherapy regimens (Stupp Protocol, PCV, Cabergoline), and progression-free survival in months.
-* **Radiogenomic Predictions**:
-  * **IDH1/IDH2 Mutation**: Differentiates secondary gliomas (IDH-mutant) from primary glioblastomas (IDH-wildtype).
-  * **1p/19q Co-deletion**: Diagnostic marker for oligodendroglioma.
-  * **MGMT Promoter Methylation**: Predicts response to Temozolomide chemotherapy.
+* **Histopathology & Outcomes**: Shows confirmed WHO classification, surgical resection grade, chemotherapy regimens, and progression-free survival in months.
+* **Radiogenomic Predictions**: Non-invasive surrogate estimates for IDH1/IDH2 mutation, 1p/19q co-deletion, and MGMT promoter methylation.
 
 ---
 
@@ -97,7 +211,7 @@ When an MRI scan is uploaded, the retrieval module projects the image into a 512
 
 Generates simulated contrast-enhanced T1 (Virtual T1ce) and fluid-suppressed T2-FLAIR images from unenhanced T1 scans using a residual convolutional network (`models/generative_synthesis.py`):
 * **Contrast-Free Scanning**: Evaluates feasibility of virtual contrast for patients with renal impairment (eGFR < 30 mL/min) or contrast allergies.
-* **Extended Tofts Pharmacokinetic Modeling**: Estimates vascular volume transfer ($K^{\text{trans}}$ in $\text{min}^{-1}$) and interstitial volume fraction ($v_e$) across seven tumor profiles (Glioma, Meningioma, Pituitary Adenoma, Metastasis, Schwannoma, Medulloblastoma, and Normal Tissue).
+* **Extended Tofts Pharmacokinetic Modeling**: Estimates vascular volume transfer ($K^{\text{trans}}$ in $\text{min}^{-1}$) and interstitial volume fraction ($v_e$) across seven tumor profiles.
 * **Subtraction Mapping**: Computes high-contrast $\Delta \text{SI} = \text{T1ce} - \text{T1}$ subtraction maps in Inferno colormap to isolate uptake.
 
 ---
@@ -117,7 +231,7 @@ Estimates patient survival trajectories using Cox Proportional Hazards regressio
 
 Provides dual radiological data inspection interfaces:
 1. **Local DICOM Part 10 Inspection**: Reads 16-bit `.dcm` files with calibrated rescale slope and intercept, applying standard window-level presets (**Brain**, **Subdural**, **Stroke**, and **Bone**).
-2. **PACS Protocol Simulator**: Interactive testbed interface demonstrating **C-ECHO (Connectivity Verification)**, **C-STORE (Storage SCP)**, and **DICOMweb QIDO-RS / WADO-RS** worklist query workflows on port 11112.
+2. **PACS Protocol Simulator**: Interactive testbed interface demonstrating **C-ECHO**, **C-STORE**, and **DICOMweb QIDO-RS / WADO-RS** worklist query workflows on port 11112.
 3. **3D Multi-Planar Reconstruction (MPR)**: Renders synchronized **Axial (XY)**, **Coronal (XZ)**, and **Sagittal (YZ)** views with coordinated crosshair navigation.
 
 ---
@@ -134,19 +248,8 @@ Assists craniotomy planning with spatial anatomical analysis:
 ## Automated Radiology Reporting & VQA Copilot
 
 Translates model outputs into structured clinical documentation:
-
-1. **ACR Structured Reporting (RadReport)**:
-   * Formats documentation following American College of Radiology guidelines.
-   * Generates sections for **Technique**, **Findings**, **Mass Effect**, **Impression**, **Ranked Differential Diagnoses**, and **Follow-up Directives**.
-   * Includes a plain-language summary for patient communication.
-   * Exports as a formatted text file (`.txt`).
-
-2. **Visual Question Answering (VQA)**:
-   * Clinicians can query the active scan:
-     * *“Apakah ada risiko efek massa atau penekanan ventrikel lateral?”*
-     * *“Apa diagnosis banding (differential diagnosis) yang paling mungkin?”*
-     * *“Apakah lesi ini bersifat intra-aksial atau ekstra-aksial?”*
-   * Runs locally using a deterministic clinical reasoning engine with zero external API calls, or connects to an optional GPT-4o backend.
+1. **ACR Structured Reporting (RadReport)**: Formats documentation following American College of Radiology guidelines (Technique, Findings, Mass Effect, Impression, Ranked Differential Diagnoses, and Follow-up Directives).
+2. **Visual Question Answering (VQA)**: Deterministic local reasoning engine addressing mass effect, midline shift, intra vs extra-axial classification, and surgical options.
 
 ---
 
@@ -173,7 +276,7 @@ NeuroScan includes an **Attention U-Net** (31.4M parameters) featuring four mult
 $$\alpha = \sigma\left(\psi^T\left(\text{ReLU}\left(W_g^T g + W_x^T x_l + b_g\right)\right) + b_\psi\right)$$
 
 * **Gated Skip-Connections**: Decoder gating signals $g$ filter encoder features $x_l$, reducing non-brain background noise while sharpening tumor boundaries.
-* **Loss Function**: Trained with hybrid $\mathcal{L}_{\text{BCE-Dice}} = 0.5 \mathcal{L}_{\text{BCE}} + 0.5 (1 - \text{Dice})$ to handle severe foreground-background pixel imbalance (Converged Dice: 90.15%).
+* **Loss Function**: Trained with hybrid $\mathcal{L}_{\text{BCE-Dice}} = 0.5 \mathcal{L}_{\text{BCE}} + 0.5 (1 - \text{Dice})$ (Converged Dice: 90.15%).
 * **Geometric Readout**: Calculates exact lesion surface area ($\text{cm}^2$), perimeter ($\text{mm}$), centroid coordinates, and circular compactness/sphericity index ($\frac{4 \pi \cdot \text{Area}}{\text{Perimeter}^2}$).
 
 ---
@@ -183,20 +286,19 @@ $$\alpha = \sigma\left(\psi^T\left(\text{ReLU}\left(W_g^T g + W_x^T x_l + b_g\ri
 ![PACS Digital Calipers](assets/caliper_preview.png)
 
 * **Orthogonal Caliper Measurements**: Major axis length and minor axis width in millimeters based on $0.47\text{ mm/px}$ calibrated Field of View.
-* **Cross-Sectional Area & Tumor Burden**: Evaluates cross-sectional area ($\text{cm}^2$) and computes intracranial tumor burden ratio relative to total brain volume.
+* **Cross-Sectional Area & Tumor Burden**: Evaluates cross-sectional area ($\text{cm}^2$) and intracranial tumor burden ratio relative to total brain volume.
 * **Spatial Localization**: Automatic detection of cranial hemisphere (*Right vs Left vs Midline*) and anatomical quadrant (*Frontal vs Parieto-Temporal vs Occipital*).
 * **Explainability Triad**: Side-by-side presentation of Isolated Tissue Crop, Grad-CAM++ Saliency Heatmap, and Digital PACS Calipers.
 
 ---
 
-## Complete Modular UI Architecture (`ui/`)
-
-The application is structured into an isolated, modular architecture across 10 specialized workflow tabs:
+## Complete Modular Architecture Structure (`ui/`)
 
 ```
 medicine/
-├── app.py                      # Clean master orchestrator (~75 lines)
+├── app.py                      # Master orchestrator (Chatbot Mode & Workstation Suite)
 ├── ui/                         # Modular presentation package
+│   ├── chatbot_interface.py    # Modern ChatGPT / Ollama WebUI style diagnostic chat interface
 │   ├── styles.py               # Dark slate clinical design system & tokens
 │   ├── sidebar.py              # Patient session diagnostic log & medical record tracking
 │   ├── tab_workstation.py      # Tab 1: Clinical Workstation (Consensus, ViT, DenseNet, Calipers, PDF)
@@ -216,6 +318,7 @@ medicine/
 │   ├── lightweight_cnn.py      # Minimalist edge CNN (6.2K params)
 │   └── custom_nn.py            # Multimodal 4-channel CNN
 ├── evaluation/                 # Clinical reasoning & metrics
+│   ├── medical_guardrails.py   # IEC 62304 / ISO 14971 Safety guardrails & grounding
 │   ├── contrast_synthesizer.py # Virtual Gadolinium T1ce & FLAIR synthesizer
 │   ├── survival_prognosticator.py # DeepSurv Cox proportional hazards engine
 │   ├── dicom_parser.py         # Native DICOM Part 10 parser & window leveling
@@ -238,47 +341,23 @@ medicine/
 
 ---
 
-## Quickstart & Local Execution
+## Repository Structure: Public Showcase vs. Private Core Architecture
 
-### 1. Installation
+This public repository serves as the **Public Showcase & Official Intellectual Property Archive** for **CerebroMaritza CADx**:
 
-```bash
-git clone https://github.com/suzirz/medical-imaging-tumor-detection.git
-cd medical-imaging-tumor-detection
-pip install -r requirements.txt
-```
-
-### 2. Dataset Setup (12,400 Balanced MRI Cohort)
-
-```bash
-# Ingest external cohorts and apply clinical augmentations:
-python scripts/expand_and_balance_dataset.py
-```
-
-### 3. Launching the Clinical Workstation (Streamlit)
-
-```bash
-python -m streamlit run app.py
-```
-
-Access the interactive workstation at `http://localhost:8501`.
-
-### 4. Local Model Training
-
-```bash
-# Train lightweight binary model (fast CPU screening):
-python train_local.py --arch lightweight --epochs 10 --batch_size 16
-
-# Train 4-class custom CNN:
-python train_local.py --arch custom --epochs 10 --batch_size 16
-```
-
-### 5. Cloud GPU Training (Google Colab T4)
-
-| Notebook | Focus | Scans / Cohort | Direct Launch |
+| Component | Visibility | Location | Description |
 |---|---|---|---|
-| **Advanced 4-Class Pipeline** (`advanced_brain_tumor_colab.ipynb`) | EfficientNet-B4, Mixed-Precision FP16, Grad-CAM++, ONNX | 12,400 Scans | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/suzirz/medical-imaging-tumor-detection/blob/main/notebooks/advanced_brain_tumor_colab.ipynb) |
-| **BraTS Multimodal 3D** (`brats_efficientnet_colab.ipynb`) | 4-Channel 3D Volumes, NIfTI preprocessor | T1, T1ce, T2, FLAIR | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/suzirz/medical-imaging-tumor-detection/blob/main/notebooks/brats_efficientnet_colab.ipynb) |
+| **System Specifications & Benchmarks** | Public | This Repository (`README.md`) | Empirical validation on 2,800 scans, 12,400 balanced MRI cohort |
+| **Official Project Proposal (PDF)** | Public | [`Proposal_Aplikasi_CerebroMaritza_Davin_Maritza.pdf`](Proposal_Aplikasi_CerebroMaritza_Davin_Maritza.pdf) | Academic project proposal and copyright submission blueprint |
+| **Empirical Models Evaluation (PDF)** | Public | [`Laporan_Evaluasi_Model_AI_NeuroScan.pdf`](Laporan_Evaluasi_Model_AI_NeuroScan.pdf) | High-resolution evaluation matrix across all neural architectures |
+| **Regulatory SaMD Design Controls** | Public | [`docs/CLINICAL_REGULATORY_SAMD.md`](docs/CLINICAL_REGULATORY_SAMD.md) | IEC 62304 Safety Class B & ISO 14971 hazard mitigations |
+| **Visual Blueprints & HUD Previews** | Public | `assets/` | Comprehensive architectural blueprints, ROC curves, PACS calipers |
+| **Full Executable Core Codebase** | **Private** | `davinmaritza/cerebromaritza-cadx` | PyTorch models, Attention U-Net, Streamlit UI, FastAPI REST server |
+| **Trained Neural Weights (`.pth`)** | **Private** | `davinmaritza/cerebromaritza-cadx` | Verified model checkpoints (`best_multiclass_efficientnet.pth`, etc.) |
+
+> **RESTRICTED ACCESS NOTICE**:  
+> The complete application source code, neural network training loops, and proprietary checkpoints are maintained in the private repository **`davinmaritza/cerebromaritza-cadx` (Private)**.  
+> Direct access is strictly regulated under institutional review. For academic licensing, peer review, or research inquiries, contact **Davin Maritza**.
 
 ---
 
@@ -286,21 +365,23 @@ python train_local.py --arch custom --epochs 10 --batch_size 16
 
 * **Simulation Protocol Testbed**:
   * The repository includes a multi-reader statistical simulation interface (`evaluation/reader_study.py`) modeling how agreement metrics (Fleiss' Kappa, Cohen's Kappa, Bland-Altman bias) would be evaluated in a formal clinical reader study.
-  * **Note**: These reader panel metrics are synthetic simulation templates for software testing. They do not constitute an empirical multi-center clinical trial.
 * **Empirical Model Verification**:
   * Real evaluated metrics are derived directly from the 2,800 held-out test scans recorded in [`evaluation_testset_results.json`](evaluation_testset_results.json).
 * **Regulatory Reference Document**:
-  * [`docs/CLINICAL_REGULATORY_SAMD.md`](docs/CLINICAL_REGULATORY_SAMD.md) is a theoretical design-control reference mapping academic architectures to ISO 14971 hazard mitigations and IEC 62304 lifecycle guidelines for educational study. No clinical certification or 510(k) clearance has been granted or claimed.
+  * [`docs/CLINICAL_REGULATORY_SAMD.md`](docs/CLINICAL_REGULATORY_SAMD.md) is a theoretical design-control reference mapping academic architectures to ISO 14971 hazard mitigations and IEC 62304 lifecycle guidelines for educational study.
 
 ---
 
-## Methodological Considerations & Limitations
+## Copyright & Intellectual Property Notice
 
-1. **Pre-Clinical Feasibility Status**: NeuroScan is an engineering prototype and research reference. It is not cleared by the US FDA, CE Notified Bodies, or Kemenkes RI for autonomous clinical diagnosis. Diagnostic intervention must always rely on board-certified radiologists and treating neurosurgeons.
-2. **2D Slice vs 3D Volumetric Context**: The primary 2D classification and segmentation models evaluate axial slices independently. While effective for screening, true 3D spatial continuity (mass effect, multi-slice volumetric burden) requires 3D NIfTI volumes, as demonstrated in `notebooks/brats_efficientnet_colab.ipynb`.
-3. **Screening Operating Points**: The 100% Malignancy Sensitivity protocol operates at a high-recall decision threshold ($\ge 0.15$). This intentionally trades off specificity to minimize false negatives during initial triage, requiring secondary verification on positive findings.
+```
+COPYRIGHT & INTELLECTUAL PROPERTY NOTICE
+Copyright © 2026 Davin Maritza. All Rights Reserved.
 
----
-
-## License
-MIT License. Developed for research, academic, and clinical decision support benchmarking.
+This software, source code, neural network architecture implementations, mathematical modeling,
+and documentation are the intellectual property of Davin Maritza.
+Unauthorized copying, duplication, modification, distribution, sublicensing, or commercialization
+without explicit prior written permission from the copyright holder is strictly prohibited.
+Protected under the Copyright Law of the Republic of Indonesia (Law No. 28 of 2014)
+and international copyright conventions.
+```
