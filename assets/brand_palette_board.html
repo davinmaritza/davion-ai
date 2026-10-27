@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroScan AI — Brand Identity & Clinical Color System</title>
+    <style>
+        :root {
+            --bg-canvas: #F8FAFC;
+            --bg-card: #FFFFFF;
+            --bg-muted: #F1F5F9;
+            --border-hairline: #E2E8F0;
+            --border-focus: #CBD5E1;
+            --text-primary: #0F172A;
+            --text-secondary: #475569;
+            --text-muted: #94A3B8;
+            --accent-cobalt: #0284C7;
+            --accent-hover: #0369A1;
+            --accent-soft: #E0F2FE;
+            --status-normal: #10B981;
+            --status-pituitary: #8B5CF6;
+            --status-glioma: #EF4444;
+            --status-warning: #F59E0B;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", Helvetica, Arial, sans-serif;
+            background: var(--bg-canvas);
+            color: var(--text-primary);
+            padding: 40px 24px;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+        .container {
+            max-width: 980px;
+            margin: 0 auto;
+        }
+        .header-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border-hairline);
+            margin-bottom: 36px;
+        }
+        .brand-lockup {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .brand-text h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .badge {
+            font-size: 0.70rem;
+            font-weight: 700;
+            background: var(--bg-muted);
+            color: var(--accent-cobalt);
+            padding: 2px 7px;
+            border-radius: 5px;
+            border: 1px solid var(--border-hairline);
+            letter-spacing: 0.02em;
+        }
+        .brand-text p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        .meta-pill {
+            background: var(--bg-card);
+            border: 1px solid var(--border-hairline);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.76rem;
+            color: var(--text-secondary);
+            font-family: monospace;
+            box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+        }
+        .section-title {
+            font-size: 0.80rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-hairline);
+            border-radius: 14px;
+            padding: 28px;
+            margin-bottom: 28px;
+            box-shadow: 0 1px 4px rgba(15, 23, 42, 0.02);
+        }
+        .logo-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+        .logo-box {
+            background: var(--bg-canvas);
+            border: 1px solid var(--border-hairline);
+            border-radius: 10px;
+            padding: 32px 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+        }
+        .logo-box.dark {
+            background: #0F172A;
+            border-color: #1E293B;
+            color: #FFFFFF;
+        }
+        .logo-desc {
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+        .logo-box.dark .logo-desc {
+            color: #94A3B8;
+        }
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 14px;
+        }
+        .swatch-card {
+            border: 1px solid var(--border-hairline);
+            border-radius: 10px;
+            overflow: hidden;
+            background: var(--bg-card);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        .swatch-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+        }
+        .swatch-color {
+            height: 72px;
+            width: 100%;
+            border-bottom: 1px solid rgba(0,0,0,0.04);
+        }
+        .swatch-info {
+            padding: 10px 12px;
+        }
+        .swatch-name {
+            font-size: 0.80rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+        }
+        .swatch-hex {
+            font-size: 0.75rem;
+            font-family: monospace;
+            color: var(--accent-cobalt);
+            font-weight: 600;
+        }
+        .swatch-role {
+            font-size: 0.70rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+        .spec-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+            text-align: left;
+        }
+        .spec-table th, .spec-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border-hairline);
+        }
+        .spec-table th {
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.74rem;
+            text-transform: uppercase;
+        }
+        .spec-table td.code {
+            font-family: monospace;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header-section">
+            <div class="brand-lockup">
+                <svg width="44" height="44" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="18" cy="18" r="15" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="3 3"/>
+                    <path d="M18 3C9.71573 3 3 9.71573 3 18C3 26.2843 9.71573 33 18 33" stroke="#0284C7" stroke-width="2.5" stroke-linecap="round"/>
+                    <line x1="18" y1="6" x2="18" y2="12" stroke="#0F172A" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="18" y1="24" x2="18" y2="30" stroke="#0F172A" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="6" y1="18" x2="12" y2="18" stroke="#0F172A" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="24" y1="18" x2="30" y2="18" stroke="#0F172A" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="18" cy="18" r="3.5" fill="#0284C7"/>
+                    <circle cx="18" cy="18" r="1.5" fill="#FFFFFF"/>
+                </svg>
+                <div class="brand-text">
+                    <h1>NeuroScan <span class="badge">AI v2.4</span></h1>
+                    <p>Clinical MRI Copilot · Brand System & Palette Specification</p>
+                </div>
+            </div>
+            <div class="meta-pill">Apple HIG / Linear Minimalist</div>
+        </div>
+
+        <!-- Section 1: Logo Mark Anatomy -->
+        <div class="section-title">1. Logo Mark Anatomy & Variations</div>
+        <div class="card">
+            <div class="logo-showcase">
+                <!-- Light Mark -->
+                <div class="logo-box">
+                    <svg width="56" height="56" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="18" cy="18" r="15" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="3 3"/>
+                        <path d="M18 3C9.71573 3 3 9.71573 3 18C3 26.2843 9.71573 33 18 33" stroke="#0284C7" stroke-width="2.5" stroke-linecap="round"/>
+                        <line x1="18" y1="6" x2="18" y2="12" stroke="#0F172A" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="18" y1="24" x2="18" y2="30" stroke="#0F172A" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="6" y1="18" x2="12" y2="18" stroke="#0F172A" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="24" y1="18" x2="30" y2="18" stroke="#0F172A" stroke-width="2" stroke-linecap="round"/>
+                        <circle cx="18" cy="18" r="3.5" fill="#0284C7"/>
+                        <circle cx="18" cy="18" r="1.5" fill="#FFFFFF"/>
+                    </svg>
+                    <span class="logo-desc">Primary Mark (Light Canvas)</span>
+                </div>
+
+                <!-- Dark Mark -->
+                <div class="logo-box dark">
+                    <svg width="56" height="56" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="18" cy="18" r="15" stroke="#334155" stroke-width="1.5" stroke-dasharray="3 3"/>
+                        <path d="M18 3C9.71573 3 3 9.71573 3 18C3 26.2843 9.71573 33 18 33" stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round"/>
+                        <line x1="18" y1="6" x2="18" y2="12" stroke="#F8FAFC" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="18" y1="24" x2="18" y2="30" stroke="#F8FAFC" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="6" y1="18" x2="12" y2="18" stroke="#F8FAFC" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="24" y1="18" x2="30" y2="18" stroke="#F8FAFC" stroke-width="2" stroke-linecap="round"/>
+                        <circle cx="18" cy="18" r="3.5" fill="#38BDF8"/>
+                        <circle cx="18" cy="18" r="1.5" fill="#0F172A"/>
+                    </svg>
+                    <span class="logo-desc">Dark Contrast / Inverse Mark</span>
+                </div>
+
+                <!-- Complete Lockup -->
+                <div class="logo-box">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <svg width="32" height="32" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="18" cy="18" r="15" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="3 3"/>
+                            <path d="M18 3C9.71573 3 3 9.71573 3 18C3 26.2843 9.71573 33 18 33" stroke="#0284C7" stroke-width="2.5" stroke-linecap="round"/>
+                            <line x1="18" y1="6" x2="18" y2="12" stroke="#0F172A" stroke-width="2" stroke-linecap="round"/>
+                            <line x1="18" y1="24" x2="18" y2="30" stroke="#0F172A" stroke-width="2" stroke-linecap="round"/>
+                            <line x1="6" y1="18" x2="12" y2="18" stroke="#0F172A" stroke-width="2" stroke-linecap="round"/>
+                            <line x1="24" y1="18" x2="30" y2="18" stroke="#0F172A" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="18" cy="18" r="3.5" fill="#0284C7"/>
+                            <circle cx="18" cy="18" r="1.5" fill="#FFFFFF"/>
+                        </svg>
+                        <span style="font-size: 1.15rem; font-weight: 700; color: #0F172A; letter-spacing: -0.02em;">NeuroScan</span>
+                    </div>
+                    <span class="logo-desc">Horizontal Brand Lockup</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Clinical Color Palette -->
+        <div class="section-title">2. Clinical Color Palette (Calibrated Medical Tones)</div>
+        <div class="card">
+            <div class="palette-grid">
+                <!-- Swatch 1 -->
+                <div class="swatch-card">
+                    <div class="swatch-color" style="background: #0284C7;"></div>
+                    <div class="swatch-info">
+                        <div class="swatch-name">Cobalt Medical</div>
+                        <div class="swatch-hex">#0284C7</div>
+                        <div class="swatch-role">Primary Accent & AI CTA</div>
+                    </div>
+                </div>
+
+                <!-- Swatch 2 -->
+                <div class="swatch-card">
+                    <div class="swatch-color" style="background: #0F172A;"></div>
+                    <div class="swatch-info">
+                        <div class="swatch-name">Obsidian Slate</div>
+                        <div class="swatch-hex">#0F172A</div>
+                        <div class="swatch-role">Primary Headings & Text</div>
+                    </div>
+                </div>
+
+                <!-- Swatch 3 -->
+                <div class="swatch-card">
+                    <div class="swatch-color" style="background: #F8FAFC; border: 1px solid #E2E8F0;"></div>
+                    <div class="swatch-info">
+                        <div class="swatch-name">Sterile Slate</div>
+                        <div class="swatch-hex">#F8FAFC</div>
+                        <div class="swatch-role">Canvas Background</div>
+                    </div>
+                </div>
+
+                <!-- Swatch 4 -->
+                <div class="swatch-card">
+                    <div class="swatch-color" style="background: #FFFFFF; border: 1px solid #E2E8F0;"></div>
+                    <div class="swatch-info">
+                        <div class="swatch-name">Pure Elevation</div>
+                        <div class="swatch-hex">#FFFFFF</div>
+                        <div class="swatch-role">Clinical Card Surface</div>
+                    </div>
+                </div>
+
+                <!-- Swatch 5 -->
+                <div class="swatch-card">
+                    <div class="swatch-color" style="background: #E2E8F0;"></div>
+                    <div class="swatch-info">
+                        <div class="swatch-name">Hairline Border</div>
+                        <div class="swatch-hex">#E2E8F0</div>
+                        <div class="swatch-role">Structural Dividers</div>
+                    </div>
+                </div>
+
+                <!-- Swatch 6: Emerald -->
+                <div class="swatch-card">
+                    <div class="swatch-color" style="background: #10B981;"></div>
+                    <div class="swatch-info">
+                        <div class="swatch-name">Normal Brain</div>
+                        <div class="swatch-hex">#10B981</div>
+                        <div class="swatch-role">Clear / Grade 0 Normal</div>
+                    </div>
+                </div>
+
+                <!-- Swatch 7: Iris -->
+                <div class="swatch-card">
+                    <div class="swatch-color" style="background: #8B5CF6;"></div>
+                    <div class="swatch-info">
+                        <div class="swatch-name">Sellar Iris</div>
+                        <div class="swatch-hex">#8B5CF6</div>
+                        <div class="swatch-role">Pituitary Adenoma</div>
+                    </div>
+                </div>
+
+                <!-- Swatch 8: Crimson -->
+                <div class="swatch-card">
+                    <div class="swatch-color" style="background: #EF4444;"></div>
+                    <div class="swatch-info">
+                        <div class="swatch-name">Crimson Alert</div>
+                        <div class="swatch-hex">#EF4444</div>
+                        <div class="swatch-role">Glioma / Mass Risk</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Semantic Role Matrix -->
+        <div class="section-title">3. Design Tokens & CSS Specification</div>
+        <div class="card">
+            <table class="spec-table">
+                <thead>
+                    <tr>
+                        <th>Design Token</th>
+                        <th>Value (Hex)</th>
+                        <th>Usage / Application</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="code">--bg-canvas</td>
+                        <td class="code">#F8FAFC</td>
+                        <td>Main application body canvas (Anti-glare Slate 50)</td>
+                    </tr>
+                    <tr>
+                        <td class="code">--bg-card</td>
+                        <td class="code">#FFFFFF</td>
+                        <td>Diagnostic assistant cards, image inspection surfaces</td>
+                    </tr>
+                    <tr>
+                        <td class="code">--accent-primary</td>
+                        <td class="code">#0284C7</td>
+                        <td>Active MRI scanning CTA, Attention U-Net contour mask</td>
+                    </tr>
+                    <tr>
+                        <td class="code">--accent-hover</td>
+                        <td class="code">#0369A1</td>
+                        <td>Interactive hover states, active session indicators</td>
+                    </tr>
+                    <tr>
+                        <td class="code">--border-hairline</td>
+                        <td class="code">#E2E8F0</td>
+                        <td>1px crisp division for tables, cards, and sidebar items</td>
+                    </tr>
+                    <tr>
+                        <td class="code">--text-heading</td>
+                        <td class="code">#0F172A</td>
+                        <td>High-contrast clinical headings, patient identification</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

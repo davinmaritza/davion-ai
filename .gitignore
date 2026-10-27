@@ -29,5 +29,10 @@ data/
 Dataset/
 *.zip
 *.tar.gz
+*.exe
+*.msi
+release-builds/
+installer/
+
 
 
