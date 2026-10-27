@@ -9,7 +9,7 @@ Membangun aplikasi desktop native **Davion AI** (*Cranial MRI Diagnostic Worksta
 - **Spesialis Bedah Saraf (Sp.BS):** Memerlukan visualisasi 3D kranial, margin jarak ke korteks elokuen (Broca, Wernicke, Motor Strip), serta trajektori kraniotomi yang aman.
 
 ### Key Value Proposition:
-- **Zero AI Slop:** Tampilan konsol instrumen perangkat keras medis asli, bebas dari kartu bertumpuk (*anti-card overuse*) dan gradien generik.
+- **Clean Medical Aesthetics:** Tampilan konsol instrumen perangkat keras medis asli, bebas dari kartu bertumpuk (*anti-card overuse*) dan gradien generik.
 - **Modality Command Hub:** 8 modalitas diagnostik tertata rapi dalam grid modul interaktif dengan status telemetri PACS live, memudahkan navigasi cepat tanpa distraksi.
 - **Native Performance & Ringan:** Dibuat dengan **Tauri 2.0 (Rust) + React 18**, menghasilkan aplikasi desktop dengan ukuran installer sangat ringkas (<25 MB) dan penggunaan memori RAM sangat rendah dibandingkan Electron.
 - **Local AI Daemon Security:** Pemrosesan citra medis (Protected Health Information / PHI) berjalan 100% lokal di mesin rumah sakit melalui Python FastAPI background daemon, tanpa kebocoran data ke cloud publik.
@@ -113,7 +113,7 @@ medicine/
 ├── evaluation/                      # Clinical analytics, Tofts PK, CBMIR, Report gen
 ├── preprocessing/                   # DICOM parser, window presets, contour cropper
 ├── docs/                            # Design & technical specifications
-│   ├── DESIGN_SYSTEM.md             # Definisi token resmi & anti-slop rules
+│   ├── DESIGN_SYSTEM.md             # Definisi token resmi & standar desain klinis
 │   └── SPEC-desktop-app.md          # Dokumen spesifikasi ini
 └── tests/                           # Unit & regression tests (pytest)
 ```
@@ -222,7 +222,7 @@ export const ModalityCard: React.FC<ModalityCardProps> = ({
 2. **Command Hub Navigation:** Halaman utama menyajikan 8 modalitas diagnostik tertata rapi dalam bento card grid ala referensi, lengkap dengan telemetry strip real-time.
 3. **Seamless Medical Viewport:** Mengklik kartu modalitas membuka Viewport PACS kerja penuh dengan overlay DICOM 4-sudut dan digital calipers.
 4. **Fast Local Inference:** Permintaan inferensi dari React desktop ke FastAPI selesai dalam waktu <150ms untuk klasifikasi dan <400ms untuk segmentasi U-Net.
-5. **Zero AI Slop Compliance:** 100% konsisten dengan prinsip anti-slop pada `docs/DESIGN_SYSTEM.md`.
+5. **Design System Compliance:** 100% konsisten dengan prinsip desain klinis pada `docs/DESIGN_SYSTEM.md`.
 
 ---
 

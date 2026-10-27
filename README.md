@@ -5,7 +5,7 @@
 # Davion AI
 ### Clinical Neuro-Oncology Diagnostic Suite & Cranial MRI CADx Workstation
 
-[![License: Proprietary](https://img.shields.io/badge/License-Proprietary-red.svg?style=flat-square)](LICENSE)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square)](LICENSE)
 [![Platform: Windows Desktop](https://img.shields.io/badge/Platform-Windows%2010%2F11%20x64-blue.svg?style=flat-square&logo=windows)](https://github.com/davinmaritza/davion-ai/releases)
 [![Tech Stack: Tauri + React](https://img.shields.io/badge/Desktop-Tauri%202.0%20(Rust)%20%2B%20React%2018-0ea5e9.svg?style=flat-square&logo=tauri)](docs/SPEC-desktop-app.md)
 [![AI Engine: PyTorch](https://img.shields.io/badge/Deep%20Learning-PyTorch%202.x%20%7C%20FastAPI-ee4c2c.svg?style=flat-square&logo=pytorch)](#system-architecture--13-clinical-modalities)
@@ -277,18 +277,26 @@ To safeguard proprietary neural network weights, clinical dataset pipelines, and
 * **Private Proprietary Core ([`davinmaritza/davion-ai-core`](https://github.com/davinmaritza/davion-ai-core))**:  
   Houses the complete executable source code, full neural network architectures, pre-trained `.pth` model checkpoints, automated evaluation pipelines, and training datasets.
 
-### Copyright Notice
-The Davion AI computer program, architectural designs, algorithms, trained weights, and technical documentations are the exclusive intellectual property of **Davin Maritza**, protected under the Copyright Laws of the Republic of Indonesia (Law No. 28 of 2014) and international copyright treaties.
+### License
+This project is licensed under the **Apache License 2.0** — see the [LICENSE](LICENSE) file for the full text.
 
-All rights are reserved. Unauthorized reproduction, reverse engineering, redistribution, or commercialization in whole or in part without prior written permission is strictly prohibited.
+```
+Copyright 2026 Davin Maritza
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+```
 
 ### Academic Collaboration & Research Access
-Academic institutions, hospitals, clinical radiology departments, and accredited researchers wishing to obtain evaluated access, conduct collaborative clinical validation, or audit the core algorithms may direct formal requests to:
+Academic institutions, hospitals, clinical radiology departments, and accredited researchers wishing to obtain evaluated access, conduct collaborative clinical validation, or audit the core algorithms may direct inquiries to:
 
 * **Author & Copyright Holder**: Davin Maritza
 * **Affiliation**: SMKN 13 Bandung / Research Consortium
 * **Official Channel**: Contact via [GitHub Profile](https://github.com/davinmaritza)
-* **License**: [Proprietary — All Rights Reserved © 2026 Davin Maritza](LICENSE)
+* **License**: [Apache-2.0 License](LICENSE)
 
 ---
 
