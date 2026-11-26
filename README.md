@@ -1,23 +1,27 @@
 <div align="center">
 
-<img src="assets/davion_logo.png" alt="Davion AI Logo" width="180" />
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/brand/davion-symbol-dark.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="assets/brand/davion-symbol-color.svg" />
+  <img src="assets/brand/davion-symbol-color.svg" alt="Davion AI Logo" width="120" />
+</picture>
 
 # Davion AI
-### Clinical Neuro-Oncology Diagnostic Suite & Cranial MRI CADx Workstation
+### Web-Only Clinical Neuro-Oncology Diagnostic Suite & Cranial MRI Workstation
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square)](LICENSE)
-[![Platform: Windows Desktop](https://img.shields.io/badge/Platform-Windows%2010%2F11%20x64-blue.svg?style=flat-square&logo=windows)](https://github.com/davinmaritza/davion-ai/releases)
-[![Tech Stack: Tauri + React](https://img.shields.io/badge/Desktop-Tauri%202.0%20(Rust)%20%2B%20React%2018-0ea5e9.svg?style=flat-square&logo=tauri)](docs/SPEC-desktop-app.md)
-[![AI Engine: PyTorch](https://img.shields.io/badge/Deep%20Learning-PyTorch%202.x%20%7C%20FastAPI-ee4c2c.svg?style=flat-square&logo=pytorch)](#system-architecture--13-clinical-modalities)
+[![Platform: Web Workstation](https://img.shields.io/badge/Platform-Web%20Workstation-0284c7.svg?style=flat-square)](web/)
+[![Frontend: React + Radix UI](https://img.shields.io/badge/Frontend-React%2018%20%7C%20Radix%20UI%20%7C%20Tailwind%20v4-0ea5e9.svg?style=flat-square)](web/)
+[![AI Engine: PyTorch + FastAPI](https://img.shields.io/badge/Deep%20Learning-PyTorch%202.x%20%7C%20FastAPI-ee4c2c.svg?style=flat-square&logo=pytorch)](#system-architecture--13-clinical-modalities)
 [![Validation: N=2,800](https://img.shields.io/badge/Validation-N%3D2%2C800%20Holdout%20(87.68%25%20Acc)-10b981.svg?style=flat-square)](docs/CLINICAL_VALIDATION_REPORT.md)
 [![Regulatory: SaMD Class II](https://img.shields.io/badge/Regulatory-IEC%2062304%20%7C%20ISO%2014971%20Class%20B-purple.svg?style=flat-square)](docs/CLINICAL_REGULATORY_SAMD.md)
 [![DJKI Copyright: 2026](https://img.shields.io/badge/Copyright-%C2%A9%202026%20Davin%20Maritza-amber.svg?style=flat-square)](Dokumen_Hak_Cipta_Program_Komputer_Davion_AI.pdf)
 
 <p align="center">
-  <b>An on-premise, air-gapped Computer-Aided Diagnosis (CADx/CADt) workstation for multi-class cranial MRI classification, sub-millimeter Attention U-Net lesion segmentation, digital PACS morphometry, and neurosurgical trajectory planning.</b>
+  <b>A web-only Computer-Aided Diagnosis (CADx/CADt) workstation for multi-class cranial MRI triage, Grad-CAM++ & lesion segmentation overlays, digital PACS calipers, longitudinal tumor tracking, and multi-dataset PyTorch retraining.</b>
 </p>
 
-[Key Features](#key-features) • [Clinical Validation](#clinical-validation--empirical-benchmarks) • [Visual Showcase](#visual-showcase) • [Architecture](#system-architecture--13-clinical-modalities) • [Regulatory Blueprint](#samd-regulatory--safety-engineering) • [Desktop App](#native-desktop-workstation) • [Legal & IP](#intellectual-property--licensing)
+[Key Features](#key-features) • [Clinical Validation](#clinical-validation--empirical-benchmarks) • [Architecture](#system-architecture--13-clinical-modalities) • [Web Workstation & Quick Start](#web-workstation--quick-start) • [Multi-Dataset Retraining](#multi-dataset-retraining-ml) • [Regulatory Blueprint](#samd-regulatory--safety-engineering) • [Legal & IP](#intellectual-property--licensing)
 
 ---
 
@@ -25,18 +29,18 @@
 
 > [!IMPORTANT]
 > **Pre-Clinical Academic & Software Engineering Reference Notice**  
-> Davion AI is a computational research prototype engineered to demonstrate advanced deep learning, radiological informatics, and software safety controls. It is **not** cleared by the US FDA, CE-MDR Notified Bodies, or national health authorities for autonomous diagnostic decision-making. All AI inferences are intended strictly as clinical decision support for licensed medical practitioners (*Radiologist-in-the-Loop*).
+> Davion AI is a computational research prototype engineered to demonstrate deep learning, radiological informatics, and software safety controls. It is **not** cleared by the US FDA, CE-MDR Notified Bodies, or national health authorities for autonomous diagnostic decision-making. All AI inferences are intended strictly as clinical decision support for licensed medical practitioners (*Radiologist-in-the-Loop*).
 
 ---
 
 ## Executive Overview
 
-**Davion AI** bridges modern deep learning architectures and hospital Picture Archiving and Communication Systems (PACS). Built as a native desktop workstation using **Tauri 2.0 (Rust) + React 18** and powered by a local **Python FastAPI** inference engine, Davion AI provides sub-10ms inference latencies on standard workstation hardware while keeping Protected Health Information (PHI) 100% on-premise.
+**Davion AI** is built as a **web-only clinical MRI workstation** pairing a **React 18 + TypeScript + Radix UI Themes** frontend (`web/`) with a local **Python FastAPI** inference backend (`backend/`) and a reproducible **multi-dataset PyTorch retraining pipeline** (`ml/`).
 
-The system addresses the diagnostic workflow of neuro-oncology across three clinical roles:
-1. **Neuroradiologists (Sp.Rad)**: Instant multi-class screening (Glioma, Meningioma, Pituitary Adenoma, Normal), multi-scale Attention U-Net pixel-level boundary segmentation, and 16-bit DICOM windowing.
-2. **Neurosurgeons (Sp.BS)**: Real-time 2D Euclidean clearance measurements from tumor margins to critical eloquent cortex areas (Broca, Wernicke, Primary Motor Strip, Optic Radiation) and 3D Multi-Planar Reconstruction (MPR).
-3. **Oncology Tumour Boards**: Radiogenomic profiling (IDH1/IDH2 mutation, 1p/19q codeletion, MGMT promoter methylation), virtual contrast synthesis ($\Delta\text{SI}$ maps), and automated ACR RadReport documentation.
+The platform supports the neuro-oncology workflow with:
+1. **Multi-Format Browser MRI Viewer**: In-memory parsing of `.dcm` (DICOM with PHI tag stripping), `.nii` / `.nii.gz` (NIfTI), `.png`, and `.jpg` slices with Window/Level presets (`Default`, `Brain`, `Subdural`, `Dural Bone`), zoom, and calibrated digital calipers.
+2. **Explainability, Segmentation & Uncertainty Gate**: Grad-CAM++ saliency and tumor segmentation mask overlays with independent opacity sliders, epistemic variance alerts (`requires_radiologist_review`), and Out-of-Distribution (OOD) rejection of non-cranial images.
+3. **Longitudinal Tracking, Reporting & Benchmarks**: Baseline (`T0`) vs. follow-up (`T1`) lesion area delta tracking, printable clinical PDF export, and a validation benchmark dashboard.
 
 ---
 
@@ -231,22 +235,54 @@ Detailed regulatory matrices are available in [`docs/CLINICAL_REGULATORY_SAMD.md
 
 ---
 
-## Native Desktop Workstation
+## Web Workstation & Quick Start
 
-Davion AI v2.5 is packaged as a standalone desktop executable for 64-bit Windows environments.
+Davion AI has evolved into a **web-only clinical workstation** using the **Hybrid Clinical Precision** interface (`@radix-ui/themes`, `@phosphor-icons/react`, self-hosted `Geist` + `Geist Mono`, Light/Dark mode toggle with a preserved `#06090F` radiological canvas) and the **Axial Quadrant** brand system ([`assets/brand/BRAND_GUIDELINES.md`](assets/brand/BRAND_GUIDELINES.md)).
 
-<div align="center">
-  <img src="assets/preview_logo.png" alt="Davion AI Desktop Interface" width="80%" />
-</div>
+### Repository Structure
+```text
+Davion-AI/
+├── ml/                   # Multi-dataset harmonizer, transforms, DavionTumorEnsemble, AttentionUNet, train/evaluate
+│   └── notebooks/        # Colab / Kaggle GPU training notebook (train_davion_multi_dataset.ipynb)
+├── backend/              # FastAPI REST API (/health, /api/v1/samples, /api/v1/diagnose, /api/v1/compare, /api/v1/benchmarks)
+├── web/                  # React 18 + TypeScript + Vite + Tailwind CSS v4 + Radix UI Themes frontend
+├── assets/               # Brand SVG/PNG/ICO kit (assets/brand/) and sample MRI scans
+└── docs/                 # Clinical validation, SaMD blueprint, specs, and AI context docs (docs/ai/)
+```
 
-<br/>
+### Run Locally
+```powershell
+# 1. Backend API (FastAPI on 127.0.0.1:8000)
+python -m venv .venv
+.\.venv\Scripts\pip.exe install fastapi uvicorn python-multipart pillow numpy pydicom nibabel pytest httpx
+.\.venv\Scripts\python.exe -m uvicorn backend.main:app --host 127.0.0.1 --port 8000 --reload
 
-### Architecture & Runtime Specs
-* **Frontend**: Tauri 2.0 (Rust native window shell) + React 18.3 + TypeScript + Tailwind CSS.
-* **Backend Daemon**: FastAPI running on `127.0.0.1:8000` with CORS sandboxed strictly to the Tauri webview origin.
-* **Installer Size**: **<25 MB** (compared to >150 MB for typical Electron wrappers).
-* **Idle RAM Usage**: **<45 MB** for the desktop shell.
-* **Installer Executable**: `Davion_AI_Setup_v2.5.exe` (available via [GitHub Releases](https://github.com/davinmaritza/davion-ai/releases)).
+# 2. Web Frontend (Vite dev server on localhost:5173)
+npm --prefix web install
+npm --prefix web run dev
+
+# 3. Tests & Production Build
+.\.venv\Scripts\python.exe -m pytest ml/tests backend/tests -v
+npm --prefix web run build
+```
+
+> **Inference Engine Fallback:** When a trained PyTorch checkpoint is not yet placed at `artifacts/checkpoints/davion_ensemble_best.pt`, `backend/` automatically operates in `radiomic_baseline` mode so the full web workflow runs out of the box, and upgrades to `pytorch_ensemble` once trained weights are added.
+
+---
+
+## Multi-Dataset Retraining (`ml/`)
+
+To generalize across scanners and global clinical cohorts, [`ml/datasets/harmonizer.py`](ml/datasets/harmonizer.py) normalizes heterogeneous labels from **Figshare (`MedOtter/Figshare_Brain_Tumor`)**, **Kaggle Brain Tumor MRI**, **Br35H**, **BraTS**, and **TCGA** into 4 canonical classes (`glioma`, `meningioma`, `pituitary`, `normal`) with strict patient-level train/val/test isolation (zero slice leakage).
+
+- **Train locally (CUDA GPU):**
+  ```bash
+  pip install -r ml/requirements.txt
+  python -m ml.train --datasets figshare=/path/figshare kaggle=/path/kaggle --output-dir artifacts/checkpoints
+  ```
+- **Train on Google Colab / Kaggle GPU:**
+  Open [`ml/notebooks/train_davion_multi_dataset.ipynb`](ml/notebooks/train_davion_multi_dataset.ipynb) directly in Google Colab:  
+  [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/davinmaritza/davion-ai/blob/main/ml/notebooks/train_davion_multi_dataset.ipynb)  
+  After training, place the exported `davion_ensemble_best.pt` and `metrics.json` inside `artifacts/checkpoints/`.
 
 ---
 
@@ -260,22 +296,18 @@ The repository includes complete documentation and official evaluation reports:
    *Research methodology, clinical indications, and institutional collaboration framework.*
 3. 📄 **Computer Program Copyright Certificate**: [`Dokumen_Hak_Cipta_Program_Komputer_Davion_AI.pdf`](Dokumen_Hak_Cipta_Program_Komputer_Davion_AI.pdf)  
    *Official Indonesian Intellectual Property (DJKI) computer program deposit and copyright documentation.*
-4. 📘 **Desktop Specification**: [`docs/SPEC-desktop-app.md`](docs/SPEC-desktop-app.md)  
-   *Engineering specification for the Tauri 2.0 + React 18 workstation architecture.*
-5. 📘 **Design System**: [`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md)  
-   *Design tokens, typography, and contrast rules for medical interfaces.*
+4. 📘 **Brand & Logo Guidelines**: [`assets/brand/BRAND_GUIDELINES.md`](assets/brand/BRAND_GUIDELINES.md)  
+   *Axial Quadrant vector masters, color tokens, clear space, and export kit.*
+5. 📘 **Legacy Desktop Spec & Design System**: [`docs/SPEC-desktop-app.md`](docs/SPEC-desktop-app.md) & [`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md)  
+   *Historical v2.5 desktop architectural reference.*
 
 ---
 
 ## Intellectual Property & Licensing
 
-### Dual-Repository Architecture
-To safeguard proprietary neural network weights, clinical dataset pipelines, and commercial trade secrets while maintaining transparent academic showcase, Davion AI employs a dual-repository structure:
-
-* **Public Showcase Repository ([`davinmaritza/davion-ai`](https://github.com/davinmaritza/davion-ai))**:  
-  Serves as the public publication portal, academic proof-of-work showcase, clinical validation reporting center, and binary release distribution portal.
-* **Private Proprietary Core ([`davinmaritza/davion-ai-core`](https://github.com/davinmaritza/davion-ai-core))**:  
-  Houses the complete executable source code, full neural network architectures, pre-trained `.pth` model checkpoints, automated evaluation pipelines, and training datasets.
+### Repository Scope
+* **`davinmaritza/davion-ai` (This Repository):** Houses the **Web-Only Workstation** (`web/`), **FastAPI Inference Server** (`backend/`), **Multi-Dataset PyTorch Retraining Pipeline** (`ml/`), **Axial Quadrant Brand Kit** (`assets/brand/`), clinical validation reports, and documentation.
+* **`davinmaritza/davion-ai-core` (Private):** Houses the legacy proprietary v2.5 desktop checkpoints and archival training datasets.
 
 ### License
 This project is licensed under the **Apache License 2.0** — see the [LICENSE](LICENSE) file for the full text.

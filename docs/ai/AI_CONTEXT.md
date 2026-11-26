@@ -16,6 +16,7 @@ Initialize the integrated Project Knowledge System for **Davion AI** and prepare
 - Built `backend/` FastAPI server with `.dcm`/`.nii.gz`/`.png`/`.jpg` parsing, in-memory PHI stripping, OOD gate, Grad-CAM++/mask overlays, `/api/v1/compare`, and `/api/v1/benchmarks`.
 - Redesigned `web/` frontend using `@radix-ui/themes`, `@phosphor-icons/react`, `@fontsource-variable/geist`, `@fontsource-variable/geist-mono`.
 - Built **Axial Quadrant** logo kit (`assets/brand/`, `BRAND_GUIDELINES.md`, PNG/ICO exports) and installed adaptive light/dark/favicon logos in `web/public/`.
+- Updated `README.md` to document the Web-Only workstation, `ml/` multi-dataset pipeline, local setup commands, Colab badge, and Axial Quadrant branding.
 
 ## Next Action
 
