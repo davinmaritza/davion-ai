@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { GitDiff, Warning, ArrowRight } from "@phosphor-icons/react";
+import { Badge, Button, Callout } from "@radix-ui/themes";
 import type { CompareResult } from "../types";
 
 export const CompareView: React.FC = () => {
@@ -28,54 +30,130 @@ export const CompareView: React.FC = () => {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-5">
+      <div className="space-y-1">
+        <h2 className="text-lg font-semibold tracking-tight">Longitudinal Scan Comparison</h2>
+        <p className="text-xs text-slate-500 dark:text-slate-400 max-w-[65ch]">
+          Compare baseline (T0) and follow-up (T1) cranial scans to quantify lesion area delta and progression trend.
+        </p>
+      </div>
+
       <form
         onSubmit={handleCompare}
-        className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 rounded-xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900"
+        className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/90"
       >
-        <label className="flex flex-col gap-1 text-sm">
-          <span className="font-medium">Baseline Scan (T0)</span>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="baseline-file" className="text-xs font-medium text-slate-700 dark:text-slate-300">
+            Baseline Scan (T0)
+          </label>
           <input
+            id="baseline-file"
             type="file"
             accept=".dcm,.nii,.nii.gz,.png,.jpg,.jpeg"
             onChange={(e) => setBaseline(e.target.files?.[0] ?? null)}
-            className="text-xs"
+            className="text-xs file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-medium file:bg-slate-100 dark:file:bg-slate-800 file:text-slate-700 dark:file:text-slate-200 hover:file:bg-slate-200 dark:hover:file:bg-slate-700 cursor-pointer"
           />
-        </label>
-        <label className="flex flex-col gap-1 text-sm">
-          <span className="font-medium">Follow-up Scan (T1)</span>
+          <span className="text-[11px] text-slate-500">DICOM, NIfTI, PNG, or JPG</span>
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <label htmlFor="followup-file" className="text-xs font-medium text-slate-700 dark:text-slate-300">
+            Follow-up Scan (T1)
+          </label>
           <input
+            id="followup-file"
             type="file"
             accept=".dcm,.nii,.nii.gz,.png,.jpg,.jpeg"
             onChange={(e) => setFollowup(e.target.files?.[0] ?? null)}
-            className="text-xs"
+            className="text-xs file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-medium file:bg-slate-100 dark:file:bg-slate-800 file:text-slate-700 dark:file:text-slate-200 hover:file:bg-slate-200 dark:hover:file:bg-slate-700 cursor-pointer"
           />
-        </label>
-        <div className="flex items-end">
-          <button
+          <span className="text-[11px] text-slate-500">DICOM, NIfTI, PNG, or JPG</span>
+        </div>
+
+        <div className="flex items-center md:justify-end">
+          <Button
             type="submit"
+            size="2"
+            color="sky"
             disabled={!baseline || !followup || loading}
-            className="w-full px-4 py-2 rounded-lg bg-sky-600 text-white text-sm font-medium disabled:opacity-50"
+            className="w-full md:w-auto"
           >
-            {loading ? "Comparing..." : "Compare Longitudinal Scans"}
-          </button>
+            <GitDiff size={15} weight="regular" />
+            {loading ? "Comparing..." : "Run Comparison"}
+          </Button>
         </div>
       </form>
 
-      {error && <p className="text-sm text-red-500">{error}</p>}
+      {error && (
+        <Callout.Root color="red" size="1">
+          <Callout.Icon>
+            <Warning size={15} weight="regular" />
+          </Callout.Icon>
+          <Callout.Text>{error}</Callout.Text>
+        </Callout.Root>
+      )}
 
-      {result && result.status === "OK" && result.longitudinal_delta && (
+      {loading && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="h-72 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-200/40 dark:bg-slate-900 animate-pulse" />
+          <div className="h-72 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-200/40 dark:bg-slate-900 animate-pulse" />
+        </div>
+      )}
+
+      {!loading && result && result.status === "REJECTED_OOD" && (
+        <Callout.Root color="red" size="2">
+          <Callout.Icon>
+            <Warning size={16} weight="regular" />
+          </Callout.Icon>
+          <Callout.Text>
+            Out-of-distribution image rejected. Both baseline and follow-up scans must be valid monochrome cranial MRIs.
+          </Callout.Text>
+        </Callout.Root>
+      )}
+
+      {!loading && result && result.status === "OK" && result.longitudinal_delta && (
         <div className="space-y-4">
-          <div className="p-4 rounded-xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 flex flex-wrap gap-6 items-center justify-between">
-            <div>
-              <div className="text-xs uppercase text-slate-500">Longitudinal Trend</div>
-              <div className="text-xl font-bold">{result.longitudinal_delta.trend}</div>
+          <div className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/90 flex flex-wrap gap-6 items-center justify-between">
+            <div className="space-y-1">
+              <div className="text-[11px] uppercase tracking-wider text-slate-500">Longitudinal Trend</div>
+              <div className="flex items-center gap-2">
+                <span className="text-xl font-bold tracking-tight">{result.longitudinal_delta.trend}</span>
+                <Badge
+                  size="1"
+                  color={
+                    result.longitudinal_delta.trend === "PROGRESSION"
+                      ? "red"
+                      : result.longitudinal_delta.trend === "REGRESSION"
+                        ? "green"
+                        : "sky"
+                  }
+                >
+                  {result.longitudinal_delta.area_change_pct > 0 ? "+" : ""}
+                  {result.longitudinal_delta.area_change_pct}%
+                </Badge>
+              </div>
             </div>
-            <div>
-              <div className="text-xs uppercase text-slate-500">Area Delta</div>
-              <div className="text-xl font-mono font-bold">
-                {result.longitudinal_delta.area_change_cm2 > 0 ? "+" : ""}
-                {result.longitudinal_delta.area_change_cm2} cm² ({result.longitudinal_delta.area_change_pct}%)
+
+            <div className="flex items-center gap-6">
+              <div>
+                <div className="text-[11px] uppercase tracking-wider text-slate-500">T0 Area</div>
+                <div className="text-base font-mono tabular-nums font-semibold">
+                  {result.baseline.morphometry?.area_cm2} cm²
+                </div>
+              </div>
+              <ArrowRight size={16} className="text-slate-400" />
+              <div>
+                <div className="text-[11px] uppercase tracking-wider text-slate-500">T1 Area</div>
+                <div className="text-base font-mono tabular-nums font-semibold">
+                  {result.followup.morphometry?.area_cm2} cm²
+                </div>
+              </div>
+              <div className="pl-4 border-l border-slate-200 dark:border-slate-800">
+                <div className="text-[11px] uppercase tracking-wider text-slate-500">Area Delta</div>
+                <div className="text-lg font-mono tabular-nums font-bold">
+                  {result.longitudinal_delta.area_change_cm2 > 0 ? "+" : ""}
+                  {result.longitudinal_delta.area_change_cm2} cm²
+                </div>
               </div>
             </div>
           </div>
@@ -87,24 +165,28 @@ export const CompareView: React.FC = () => {
             ].map(({ title, item }) => (
               <div
                 key={title}
-                className="p-4 rounded-xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 space-y-2"
+                className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/90 space-y-3"
               >
-                <div className="flex justify-between text-sm font-semibold">
-                  <span>{title}</span>
-                  <span className="uppercase">{item.predicted_class}</span>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-semibold">{title}</span>
+                  <Badge variant="soft" color="sky" className="uppercase font-mono">
+                    {item.predicted_class}
+                  </Badge>
                 </div>
-                <div className="relative aspect-square bg-[#06090F] rounded-lg overflow-hidden">
+                <div className="relative aspect-square bg-[#06090F] rounded-lg overflow-hidden border border-slate-800">
                   <img src={item.preview_data_url} alt={title} className="w-full h-full object-contain" />
                   {item.segmentation_data_url && (
                     <img
                       src={item.segmentation_data_url}
-                      alt={`${title} mask`}
+                      alt={`${title} segmentation mask`}
                       className="absolute inset-0 w-full h-full object-contain opacity-60"
                     />
                   )}
                 </div>
-                <div className="text-xs font-mono text-slate-500">
-                  Area: {item.morphometry?.area_cm2} cm² · Major Axis: {item.morphometry?.major_axis_mm} mm
+                <div className="flex justify-between text-xs font-mono tabular-nums text-slate-500 dark:text-slate-400">
+                  <span>Area: {item.morphometry?.area_cm2} cm²</span>
+                  <span>Major Axis: {item.morphometry?.major_axis_mm} mm</span>
+                  <span>Sphericity: {item.morphometry?.sphericity}</span>
                 </div>
               </div>
             ))}

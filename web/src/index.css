@@ -1,4 +1,27 @@
+@import "@fontsource-variable/geist";
+@import "@fontsource-variable/geist-mono";
 @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  body {
+    font-family: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  code,
+  pre,
+  .font-mono {
+    font-family: "Geist Mono Variable", ui-monospace, SFMono-Regular, monospace;
+  }
+}
+
+.radix-themes {
+  --default-font-family: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+  --code-font-family: "Geist Mono Variable", ui-monospace, SFMono-Regular, monospace;
+}
 
 @media print {
   .no-print {

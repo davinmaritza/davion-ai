@@ -8,18 +8,18 @@ Initialize the integrated Project Knowledge System for **Davion AI** and prepare
 
 ## Current Work
 
-- Completed initial functional build of **Davion AI Web-Only** (`ml/`, `backend/`, `web/`) and verified TypeScript/Vite build + `pytest` suite.
+- Completed **Option A (Hybrid Clinical Precision)** frontend redesign (`@radix-ui/themes`, `@phosphor-icons/react`, self-hosted `Geist` + `Geist Mono`, `tabular-nums`, keyboard shortcuts, Window/Level presets, and preserved `#06090F` MRI viewport across Light/Dark modes).
 
 ## Last Completed Work
 
-- Built `ml/` multi-dataset harmonizer (patient-level zero-leakage splits), transforms, `DavionTumorEnsemble` (`timm`), `AttentionUNet`, `train.py`, `evaluate.py`, and Colab/Kaggle notebook `ml/notebooks/train_davion_multi_dataset.ipynb`.
-- Built `backend/` FastAPI server (`backend/main.py`) with `.dcm`/`.nii.gz`/`.png`/`.jpg` parsing, in-memory PHI stripping, OOD gate, Grad-CAM++/mask overlays, `/api/v1/compare`, and `/api/v1/benchmarks`.
-- Built `web/` React + TypeScript + Vite + Tailwind app with MRI viewport, opacity sliders, digital calipers, longitudinal compare, benchmarks table, Light/Dark toggle, and PDF print export.
-- Synchronized project knowledge to Notion (`Davion AI` root page + 19 child pages).
+- Built `ml/` multi-dataset harmonizer, `DavionTumorEnsemble`, `AttentionUNet`, and Colab/Kaggle T4 notebook (`96924da` / `f7b967d` on `origin/main`).
+- Built `backend/` FastAPI server with `.dcm`/`.nii.gz`/`.png`/`.jpg` parsing, in-memory PHI stripping, OOD gate, Grad-CAM++/mask overlays, `/api/v1/compare`, and `/api/v1/benchmarks`.
+- Redesigned `web/` frontend using `@radix-ui/themes`, `@phosphor-icons/react`, `@fontsource-variable/geist`, `@fontsource-variable/geist-mono`.
+- Built **Axial Quadrant** logo kit (`assets/brand/`, `BRAND_GUIDELINES.md`, PNG/ICO exports) and installed adaptive light/dark/favicon logos in `web/public/`.
 
 ## Next Action
 
-- Run `.\.venv\Scripts\python.exe -m uvicorn backend.main:app --port 8000` and `npm --prefix web run dev` to test live in browser, or run `ml/notebooks/train_davion_multi_dataset.ipynb` on CUDA GPU / Colab to generate trained `.pt` weights.
+- Run multi-dataset training (`ml/notebooks/train_davion_multi_dataset.ipynb` on Kaggle GPU T4 x2 or Colab/CUDA) and place `davion_ensemble_best.pt` + `metrics.json` into `artifacts/checkpoints/`.
 
 ## Active Constraints
 
@@ -60,16 +60,17 @@ Initialize the integrated Project Knowledge System for **Davion AI** and prepare
 
 ## Last Validation
 
-- `npm --prefix web run build` (`tsc && vite build`): PASSED (`dist/` built in 2.84s).
-- `.\.venv\Scripts\python.exe -m pytest ml/tests backend/tests -v`: PASSED (6/6 tests in 0.89s).
+- `npm --prefix web run build` (`tsc && vite build`): PASSED (built in 5.13s, bundled Geist/Geist Mono woff2 fonts).
+- `.\.venv\Scripts\python.exe -m pytest ml/tests backend/tests -v`: PASSED (6/6 tests in 1.15s).
+- Browser UI verification (`http://localhost:5173`): PASSED (zero console/network errors; Dark & Light mode + `#06090F` viewport + Benchmarks verified).
 
 ## Last Context Update
 
-- `2026-11-26T12:23+07:00`
+- `2026-11-26T14:59+07:00`
 
 ## Last Successful Notion Sync
 
-- `2026-11-26T12:23+07:00` (Root Page: `Davion AI`, ID `42413039-c767-814b-be9d-cfe83a24a62e`, 19 child pages `00`–`18` synced)
+- `2026-11-26T14:59+07:00` (Root Page: `Davion AI`, ID `42413039-c767-814b-be9d-cfe83a24a62e`)
 
 ## Cross-AI Handoff Metadata
 

@@ -1,0 +1,11 @@
+<svg fill="#000000" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="title-sym"><title>Davion AI logo</title>
+  <title id="title-sym">Davion AI logo</title>
+  <g id="symbol">
+    <!-- Base 3 MPR axial quadrants (Deep Clinical Slate #0F172A) -->
+    <path fill="#000000" d="M 26 62 A 24 24 0 0 1 50 38 H 104 A 8 8 0 0 1 112 46 V 93.2 A 42 42 0 0 0 81.2 124 H 34 A 8 8 0 0 1 26 116 Z
+             M 26 152 A 8 8 0 0 1 34 144 H 81.2 A 42 42 0 0 0 112 174.8 V 222 A 8 8 0 0 1 104 230 H 50 A 24 24 0 0 1 26 206 Z
+             M 132 174.8 A 42 42 0 0 0 162.8 144 H 210 A 8 8 0 0 1 218 152 V 206 A 24 24 0 0 1 194 230 H 140 A 8 8 0 0 1 132 222 Z" />
+    <!-- Elevated Top-Right ROI Quadrant (Clinical Blue #0284C7) -->
+    <path fill="#000000" d="M 144 34 A 8 8 0 0 1 152 26 H 206 A 24 24 0 0 1 230 50 V 104 A 8 8 0 0 1 222 112 H 174.8 A 42 42 0 0 0 144 81.2 Z" />
+  </g>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="title-small">
+  <title id="title-small">Davion AI favicon mark</title>
+  <g id="symbol">
+    <!-- Simplified wider 28px gap for crisp 16px/32px favicon rendering -->
+    <path fill="#0F172A" d="M 22 60 A 24 24 0 0 1 46 36 H 106 V 88 A 40 40 0 0 0 74 120 H 22 Z
+             M 22 148 H 74 A 40 40 0 0 0 106 180 V 232 H 46 A 24 24 0 0 1 22 208 Z
+             M 134 180 A 40 40 0 0 0 166 148 H 218 V 208 A 24 24 0 0 1 194 232 H 134 Z" />
+    <path fill="#0284C7" d="M 148 22 H 210 A 24 24 0 0 1 234 46 V 108 H 180 A 40 40 0 0 0 148 76 Z" />
+  </g>
+</svg>
