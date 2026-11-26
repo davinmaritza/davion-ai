@@ -36,3 +36,11 @@ installer/
 
 
 
+
+# Node & Web build artifacts
+node_modules/
+web/dist/
+
+# Test & training outputs
+.pytest_cache/
+artifacts/
